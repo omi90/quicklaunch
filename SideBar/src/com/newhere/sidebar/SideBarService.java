@@ -121,8 +121,10 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 				// TODO Auto-generated method stub
 				AppInfo ai = res.get(pos);
 				Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
-				if(LaunchApp!=null)
+				if(LaunchApp!=null){
 					startActivity( LaunchApp );
+					SideBarService.this.onClick(prev_image);
+				}
 			}
 		});
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {

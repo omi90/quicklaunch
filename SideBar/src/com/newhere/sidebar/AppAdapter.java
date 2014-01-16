@@ -2,7 +2,10 @@ package com.newhere.sidebar;
 
 import java.util.List;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,19 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		ImageView im = (ImageView)rowView.findViewById(R.id.app_image);
 		ri = values.get(position);
 		im.setImageDrawable(ri.icon);
+		ActivityManager manager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
+		List<RunningAppProcessInfo> processes = manager.getRunningAppProcesses();
+		if(checkRunningStatus(ri.pname, processes))
+			rowView.setBackgroundColor(Color.CYAN);
 		return rowView;
+	}
+	private boolean checkRunningStatus(String packageName, List<RunningAppProcessInfo> processes) {
+		for(RunningAppProcessInfo proInfo:processes){
+			for(String pkgName:proInfo.pkgList){
+				if(pkgName.equalsIgnoreCase(packageName))
+					return true;
+			}
+		}
+		return false;
 	}
 }

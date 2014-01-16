@@ -6,6 +6,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,12 +33,12 @@ public class AppAdapter_Launcher extends ArrayAdapter<AppInfo> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		int list_layout = R.layout.listview_launcher;
+		int list_layout = R.layout.listview_launch;
 		View rowView = inflater.inflate(list_layout, parent, false);
 		CheckBox cb = (CheckBox)rowView.findViewById(R.id.checkBox1);
 		ImageView im = (ImageView)rowView.findViewById(R.id.imageView1);
 		TextView tv1 = (TextView)rowView.findViewById(R.id.textView1);
-		TextView tv2 = (TextView)rowView.findViewById(R.id.textView2);
+		//TextView tv2 = (TextView)rowView.findViewById(R.id.textView2);
 		ri = values.get(position);
 		if(appsPref.containsKey(ri.appname)){
 			cb.setChecked((Boolean)appsPref.get(ri.appname));
@@ -47,7 +48,7 @@ public class AppAdapter_Launcher extends ArrayAdapter<AppInfo> {
 		}
 		im.setImageDrawable(ri.icon);
 		tv1.setText(ri.appname);
-		tv2.setText(ri.pname);
+		//tv2.setText(ri.pname);
 		return rowView;
 	}
 }

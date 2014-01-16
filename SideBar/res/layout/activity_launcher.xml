@@ -2,26 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-   
     <ProgressBar
         android:id="@+id/progressbar_loading"
         style="?android:attr/progressBarStyleLarge"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 	<LinearLayout
     	android:layout_width="match_parent"
     	android:layout_height="match_parent"
     	android:orientation="vertical"
     	tools:context=".LauncherActivity" >
-    	<ListView
-	        android:id="@+id/listView1"
+    	<GridView 
+    	    android:id="@+id/gridView1"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
+	        android:padding="5dp"
+	        android:numColumns="4"
+	        android:horizontalSpacing="5dp"
+	        android:verticalSpacing="15dp"
 	        android:layout_weight="0.9">
-		</ListView>
-		<Button 
+    	</GridView>
+    	<Button 
 		    android:id="@+id/save"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"

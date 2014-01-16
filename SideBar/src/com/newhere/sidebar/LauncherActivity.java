@@ -1,17 +1,8 @@
 package com.newhere.sidebar;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,12 +23,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 public class LauncherActivity extends Activity {
 	//private static final String fileName = "sidebar_preferences";
 	private ListView lv;
+	private GridView gv;
+	private CheckBox cb;
 	private int listSize=0;
 	private ArrayList<AppInfo> apps=null;
 	private Button save;
@@ -48,7 +45,9 @@ public class LauncherActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_launcher);
-		lv = (ListView)findViewById(R.id.listView1);
+		//lv = (ListView)findViewById(R.id.listView1);
+		gv = (GridView)findViewById(R.id.gridView1);
+		//cb = (CheckBox)findViewById(R.id.checkBoxAll);
 		save = (Button)findViewById(R.id.save);
 		save.setOnClickListener(new OnClickListener() {
 			@Override
@@ -61,6 +60,39 @@ public class LauncherActivity extends Activity {
 				startService(intent);
 			}
 		});
+		/*cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					int items = apps.size();
+					System.out.println(items);
+					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+					SharedPreferences.Editor edit = pref.edit();
+					for(int i=0;i<items;i++){
+						LinearLayout ll = (LinearLayout)lv.getChildAt(i);
+						CheckBox cb = null;
+						if(ll!=null)cb= (CheckBox)ll.findViewById(R.id.checkBox1);
+						if(cb!=null)cb.setChecked(true);
+						edit.putBoolean(apps.get(i).appname, true);
+					}
+					edit.commit();
+				}
+				else{
+					int items = apps.size();
+					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+					SharedPreferences.Editor edit = pref.edit();
+					for(int i=0;i<items;i++){
+						LinearLayout ll = (LinearLayout)lv.getChildAt(i);
+						CheckBox cb = null;
+						if(ll!=null)cb= (CheckBox)ll.findViewById(R.id.checkBox1);
+						if(cb!=null)cb.setChecked(false);
+						edit.putBoolean(apps.get(i).appname, false);
+					}
+					edit.commit();
+				}
+			}
+		});*/
 		pb = (ProgressBar)findViewById(R.id.progressbar_loading);
 	}
 	@Override
@@ -83,8 +115,8 @@ public class LauncherActivity extends Activity {
 					public void run() {
 						// TODO Auto-generated method stub
 						pb.setVisibility(View.GONE);
-						lv.setAdapter(new AppAdapter_Launcher(getApplicationContext(), R.layout.listview_launcher, apps, data));
-						lv.setOnItemClickListener(new OnItemClickListener() {
+						gv.setAdapter(new AppAdapter_Launcher(getApplicationContext(), R.layout.listview_launch, apps, data));
+						gv.setOnItemClickListener(new OnItemClickListener() {
 							@Override
 							public void onItemClick(AdapterView<?> arg0, View view, int pos, long id) {
 								// TODO Auto-generated method stub
@@ -119,27 +151,28 @@ public class LauncherActivity extends Activity {
 		for(AppInfo ai:appsPref){
 			if(!pref.contains(ai.appname)){
 				edit.putBoolean(ai.appname, true);
-				System.out.println(ai.appname+" >>"+true);				
+				//System.out.println(ai.appname+" >>"+true);				
 			}
-			else
-				System.out.println(ai.appname+" >>"+false);
+			else{
+				//System.out.println(ai.appname+" >>"+false);
+			}
 		}
 		edit.commit();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.launcher, menu);
+		//MenuInflater inflater=getMenuInflater();
+        //inflater.inflate(R.menu.launcher, menu);
         return super.onCreateOptionsMenu(menu);
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		if(item.getItemId()==R.id.customize_menu){
+		/*if(item.getItemId()==R.id.customize_menu){
 			final Intent i = new Intent(getApplicationContext(),CustomizeActivity.class);
 			startActivity(i);
 		}
-		return super.onOptionsItemSelected(item);
+		*/return super.onOptionsItemSelected(item);
 	}
 	public static ArrayList<AppInfo> getInstalledApps(boolean systemApps,PackageManager pm){
 		Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -187,7 +220,6 @@ public class LauncherActivity extends Activity {
 				newInfo.versionCode = p.versionCode;
 				newInfo.icon = p.applicationInfo.loadIcon(pm);
 				newInfo.sourceDir = p.applicationInfo.sourceDir;
-				//System.out.println(newInfo.sourceDir);
 				res.add(newInfo);
 			}
 		}
