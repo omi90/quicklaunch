@@ -1,8 +1,10 @@
-package com.newhere.sidebar;
+package com.newhere.quicklaunch;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.newhere.sidebar.R;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -63,7 +65,6 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 	}
 	public void onCreate(){
 		super.onCreate();
-		System.out.println("service created");
 		openAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.animator.open_anim);
 		closeAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.animator.close_anim);
 		closeAnim.setAnimationListener(this);
@@ -87,7 +88,7 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 		param.gravity = Gravity.TOP|Gravity.LEFT;
 		param.x = 0;
 		param.y = 0;
-		param.dimAmount = (float) 0.2;
+		param.dimAmount = (float) 0.04;
 		next_image = new ImageView(this);
 		next_image.setImageResource(R.drawable.drag);
 		param2 = new WindowManager.LayoutParams(
@@ -159,7 +160,6 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		System.out.println("removing view");
 		super.onDestroy();
 		if (next_image != null)
 			wm.removeView(next_image);
@@ -193,7 +193,6 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 	@Override
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println("key pressed");
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 			SideBarService.this.onClick(prev_image);
 	    }

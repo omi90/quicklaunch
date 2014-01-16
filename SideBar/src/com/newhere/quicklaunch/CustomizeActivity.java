@@ -1,4 +1,4 @@
-package com.newhere.sidebar;
+package com.newhere.quicklaunch;
 
 import android.app.Activity;
 

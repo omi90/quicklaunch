@@ -1,8 +1,10 @@
-package com.newhere.sidebar;
+package com.newhere.quicklaunch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.newhere.sidebar.R;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -128,7 +130,6 @@ public class LauncherActivity extends Activity {
 								edit.putBoolean(apps.get(pos).appname, !value);
 								edit.commit();
 								data.put(apps.get(pos).appname, !value);
-								System.out.println(apps.get(pos).appname+" <<"+pref.getBoolean(apps.get(pos).appname, false));
 							}
 						});
 						final Intent intent = new Intent(getBaseContext(), SideBarService.class);
@@ -151,10 +152,8 @@ public class LauncherActivity extends Activity {
 		for(AppInfo ai:appsPref){
 			if(!pref.contains(ai.appname)){
 				edit.putBoolean(ai.appname, true);
-				//System.out.println(ai.appname+" >>"+true);				
 			}
 			else{
-				//System.out.println(ai.appname+" >>"+false);
 			}
 		}
 		edit.commit();
@@ -193,7 +192,6 @@ public class LauncherActivity extends Activity {
 		    newInfo.versionCode = p.versionCode;
 		    newInfo.icon = p.applicationInfo.loadIcon(pm);
 		    newInfo.sourceDir = p.applicationInfo.sourceDir;
-		    //System.out.println(newInfo.sourceDir);
 		    res.add(newInfo);
 		}
 		return res;

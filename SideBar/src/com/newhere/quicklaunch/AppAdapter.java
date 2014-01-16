@@ -1,6 +1,8 @@
-package com.newhere.sidebar;
+package com.newhere.quicklaunch;
 
 import java.util.List;
+
+import com.newhere.sidebar.R;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;

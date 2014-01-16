@@ -1,8 +1,10 @@
-package com.newhere.sidebar;
+package com.newhere.quicklaunch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.newhere.sidebar.R;
 
 import android.content.Context;
 import android.content.SharedPreferences;
