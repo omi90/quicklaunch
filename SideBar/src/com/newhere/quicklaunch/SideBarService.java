@@ -3,18 +3,16 @@ package com.newhere.quicklaunch;
 import java.io.File;
 import java.util.List;
 import com.newhere.sidebar.R;
-import android.view.animation.Transformation;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
-import android.view.Display;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -43,6 +41,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	private Animation openAnim,closeAnim;
 	private LinearLayout ll;
 	private boolean isSidebarVisible = false;
+	private DisplayMetrics dm;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -51,17 +50,15 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	public void onCreate(){
 		super.onCreate();
 		wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
+		dm = new DisplayMetrics();
 		wm.getDefaultDisplay().getMetrics(dm);
 		int minHeight = Math.max(dm.heightPixels, dm.widthPixels);
 		int minWidth = minHeight==dm.heightPixels?dm.heightPixels:dm.widthPixels;
 		paramSidebarVisible = new WindowManager.LayoutParams(
-				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.TYPE_PHONE,
-				//WindowManager.LayoutParams.FLAG_DIM_BEHIND|
-				WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL|
-				WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+				WindowManager.LayoutParams.FLAG_DIM_BEHIND,
 				PixelFormat.TRANSLUCENT);
 		paramSidebarVisible.gravity = Gravity.TOP|Gravity.LEFT;
 		paramSidebarVisible.x = 0;
@@ -92,7 +89,6 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		closeAnim.setDuration(300);
 		closeAnim.setAnimationListener(this);
 		closeAnim.setFillAfter(true);
-		final PackageManager pm = getPackageManager();
 		Intent intent = new Intent(Intent.ACTION_MAIN, null);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
 		res = LauncherActivity.getPrefInstalledApps(false, getPackageManager(), getApplicationContext());
@@ -103,7 +99,6 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 			public void onItemClick(AdapterView<?> parent, View view, int pos,
 					long id) {
 				// TODO Auto-generated method stub
-				System.out.println("clciked on items");
 				AppInfo ai = res.get(pos);
 				Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
 				if(LaunchApp!=null){
@@ -116,7 +111,6 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					int pos, long id) {
-				System.out.println("long cliked on items");
 				AppInfo ai = res.get(pos);
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				sharingIntent.setType("application/vnd.android.package-archive");
@@ -131,6 +125,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		});
 		prev_image = (ImageView)myview.findViewById(R.id.prev_item);
 		prev_image.setOnTouchListener(this);
+		myview.setOnTouchListener(this);
 		wm.addView(myview, paramSidebarHidden);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Message").setContentText("Click to close");
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -146,40 +141,34 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	@Override
 	public boolean onTouch(View v,MotionEvent me) {
 		// TODO Auto-generated method stub
-		System.out.println("inside onTouch");
-		if(me == null){
-			System.out.println("Any shortcut clicked");
-			wm.updateViewLayout(myview, paramSidebarHidden);
+		if(me == null && v.equals(prev_image)){
+			ll.startAnimation(closeAnim);
+			return true;
+		}
+		else if(v.equals(prev_image) && me.getAction()==MotionEvent.ACTION_DOWN){
+			if(!isSidebarVisible){
+				ll.startAnimation(openAnim);
+				parent.invalidate();
+				isSidebarVisible = true;
+			}
+			else{
+				ll.startAnimation(closeAnim);
+				isSidebarVisible = false;
+			}
+			return true;
+		}
+		else if(v.equals(setting_image)){
 			ll.startAnimation(closeAnim);
 			final Intent intent = new Intent(getApplicationContext(), LauncherActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			return true;
 		}
-		else if(me.getAction() == MotionEvent.ACTION_OUTSIDE){
-			wm.updateViewLayout(myview, paramSidebarHidden);
+		else if(v.equals(myview) && isSidebarVisible){
 			ll.startAnimation(closeAnim);
 			isSidebarVisible = false;
-			System.out.println("Touched outside");
 			return true;
 		} 
-		else if(v.equals(prev_image) && me.getAction()==MotionEvent.ACTION_DOWN){
-			if(!isSidebarVisible){
-				wm.updateViewLayout(myview, paramSidebarVisible);
-				System.out.println(ll.getVisibility());
-				ll.startAnimation(openAnim);
-				parent.invalidate();
-				isSidebarVisible = true;
-				System.out.println("View was not visible");
-			}
-			else{
-				wm.updateViewLayout(myview, paramSidebarHidden);
-				ll.startAnimation(closeAnim);
-				isSidebarVisible = false;
-				System.out.println("View was visible");
-			}
-			return true;
-		}
 		return false;
 	}
 	@Override
@@ -193,6 +182,19 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		System.out.println("Animation ended");
+		if(animation.equals(openAnim)){
+			wm.updateViewLayout(myview, paramSidebarVisible);
+			myview.getLayoutParams().width =LayoutParams.MATCH_PARENT;
+			myview.setOnTouchListener(this);
+			myview.requestLayout();
+		}
+		else{
+			wm.updateViewLayout(myview, paramSidebarHidden);
+			myview.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+			myview.setOnTouchListener(null);
+			myview.requestLayout();
+			parent.invalidate();
+		}
 	}
 	@Override
 	public void onAnimationRepeat(Animation animation) {
@@ -201,7 +203,6 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	@Override
 	public void onAnimationStart(Animation animation) {
 		// TODO Auto-generated method stub
-		System.out.println("Animation started");
 	}
 }
 class AppInfo {
@@ -212,33 +213,4 @@ class AppInfo {
     String iconLoc;
     Drawable icon;
     String sourceDir = "";
-}
-class ResizeAnimation extends Animation {
-	private int startWidth;
-	final int targetWidth;
-	View view;
- 
-	public ResizeAnimation(View view, int targetWidth) {
-		this.view = view;
-		this.targetWidth = targetWidth;
-	}
- 
-	@Override
-	protected void applyTransformation(float interpolatedTime, Transformation t) {
-		int newWidth = (int) (startWidth + (targetWidth - startWidth) * interpolatedTime);
-		view.getLayoutParams().width = newWidth;
-		view.requestLayout();
-	}
- 
-	@Override
-	public void initialize(int width, int height, int parentWidth, int parentHeight) {
-		super.initialize(width, height, parentWidth, parentHeight);
-		startWidth = view.getWidth();
-		System.out.println("start width >> "+startWidth);
-	}
- 
-	@Override
-	public boolean willChangeBounds() {
-		return true;
-	}
 }

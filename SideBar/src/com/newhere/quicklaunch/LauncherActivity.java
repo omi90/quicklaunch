@@ -3,6 +3,7 @@ package com.newhere.quicklaunch;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.newhere.sidebar.R;
 
@@ -139,17 +140,16 @@ public class LauncherActivity extends Activity {
 		*/return super.onOptionsItemSelected(item);
 	}
 	public static ArrayList<AppInfo> getInstalledApps(boolean systemApps,PackageManager pm){
-		Intent intent = new Intent(Intent.ACTION_MAIN, null);
-		intent.addCategory(Intent.CATEGORY_LAUNCHER);
 		List<PackageInfo> apps = pm.getInstalledPackages(PackageManager.GET_META_DATA);
 		ArrayList<AppInfo> res = new ArrayList<AppInfo>();
 		for(int i=0;i<apps.size();i++) {
 			PackageInfo p = apps.get(i);
-			/*if(!systemApps){
-				if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+			if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+				Intent intent = pm.getLaunchIntentForPackage(p.packageName);
+				Set<String> cat = intent==null ? null : intent.getCategories();
+				if(intent == null || cat == null || !cat.contains(Intent.CATEGORY_LAUNCHER))
 					continue ;
-				}
-			}*/
+			}
 			AppInfo newInfo = new AppInfo();
 		    newInfo.appname = p.applicationInfo.loadLabel(pm).toString();
 		    newInfo.pname = p.packageName;
@@ -164,17 +164,18 @@ public class LauncherActivity extends Activity {
 	public static ArrayList<AppInfo> getPrefInstalledApps(boolean systemApps,PackageManager pm,Context context){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 		Map<String,?> data = pref.getAll();
-		Intent intent = new Intent(Intent.ACTION_MAIN, null);
-		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		//Intent intent = new Intent(Intent.ACTION_MAIN, null);
+		//intent.addCategory(Intent.CATEGORY_LAUNCHER);
 		List<PackageInfo> apps = pm.getInstalledPackages(PackageManager.GET_META_DATA);
 		ArrayList<AppInfo> res = new ArrayList<AppInfo>();
 		for(int i=0;i<apps.size();i++) {
 			PackageInfo p = apps.get(i);
-			/*if(!systemApps){
-				if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-					continue ;
-				}
-			}*/
+			if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+					Intent intent = pm.getLaunchIntentForPackage(p.packageName);
+					Set<String> cat = intent==null ? null : intent.getCategories();
+					if(intent == null || cat == null || !cat.contains(Intent.CATEGORY_LAUNCHER))
+						continue ;
+			}
 			if(data.containsKey(p.applicationInfo.loadLabel(pm).toString()) && (Boolean)data.get(p.applicationInfo.loadLabel(pm).toString())){
 				AppInfo newInfo = new AppInfo();
 				newInfo.appname = p.applicationInfo.loadLabel(pm).toString();
