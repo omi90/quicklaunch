@@ -47,9 +47,7 @@ public class LauncherActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_launcher);
-		//lv = (ListView)findViewById(R.id.listView1);
 		gv = (GridView)findViewById(R.id.gridView1);
-		//cb = (CheckBox)findViewById(R.id.checkBoxAll);
 		save = (Button)findViewById(R.id.save);
 		save.setOnClickListener(new OnClickListener() {
 			@Override
@@ -62,39 +60,6 @@ public class LauncherActivity extends Activity {
 				startService(intent);
 			}
 		});
-		/*cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
-				if(isChecked){
-					int items = apps.size();
-					System.out.println(items);
-					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-					SharedPreferences.Editor edit = pref.edit();
-					for(int i=0;i<items;i++){
-						LinearLayout ll = (LinearLayout)lv.getChildAt(i);
-						CheckBox cb = null;
-						if(ll!=null)cb= (CheckBox)ll.findViewById(R.id.checkBox1);
-						if(cb!=null)cb.setChecked(true);
-						edit.putBoolean(apps.get(i).appname, true);
-					}
-					edit.commit();
-				}
-				else{
-					int items = apps.size();
-					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-					SharedPreferences.Editor edit = pref.edit();
-					for(int i=0;i<items;i++){
-						LinearLayout ll = (LinearLayout)lv.getChildAt(i);
-						CheckBox cb = null;
-						if(ll!=null)cb= (CheckBox)ll.findViewById(R.id.checkBox1);
-						if(cb!=null)cb.setChecked(false);
-						edit.putBoolean(apps.get(i).appname, false);
-					}
-					edit.commit();
-				}
-			}
-		});*/
 		pb = (ProgressBar)findViewById(R.id.progressbar_loading);
 	}
 	@Override
@@ -180,11 +145,11 @@ public class LauncherActivity extends Activity {
 		ArrayList<AppInfo> res = new ArrayList<AppInfo>();
 		for(int i=0;i<apps.size();i++) {
 			PackageInfo p = apps.get(i);
-			if(!systemApps){
+			/*if(!systemApps){
 				if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
 					continue ;
 				}
-			}
+			}*/
 			AppInfo newInfo = new AppInfo();
 		    newInfo.appname = p.applicationInfo.loadLabel(pm).toString();
 		    newInfo.pname = p.packageName;
@@ -205,14 +170,16 @@ public class LauncherActivity extends Activity {
 		ArrayList<AppInfo> res = new ArrayList<AppInfo>();
 		for(int i=0;i<apps.size();i++) {
 			PackageInfo p = apps.get(i);
-			if(!systemApps){
+			/*if(!systemApps){
 				if ((p.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
 					continue ;
 				}
-			}
+			}*/
 			if(data.containsKey(p.applicationInfo.loadLabel(pm).toString()) && (Boolean)data.get(p.applicationInfo.loadLabel(pm).toString())){
 				AppInfo newInfo = new AppInfo();
 				newInfo.appname = p.applicationInfo.loadLabel(pm).toString();
+				if(newInfo.appname.contains("com."))
+					continue;
 				newInfo.pname = p.packageName;
 				newInfo.versionName = p.versionName;
 				newInfo.versionCode = p.versionCode;

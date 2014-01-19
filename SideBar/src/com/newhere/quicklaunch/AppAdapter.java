@@ -33,8 +33,9 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		im.setImageDrawable(ri.icon);
 		ActivityManager manager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
 		List<RunningAppProcessInfo> processes = manager.getRunningAppProcesses();
-		if(checkRunningStatus(ri.pname, processes))
-			rowView.setBackgroundColor(Color.CYAN);
+		if(checkRunningStatus(ri.pname, processes)){
+			rowView.setBackgroundColor(Color.argb(200, 0, 255, 255));
+		}
 		return rowView;
 	}
 	private boolean checkRunningStatus(String packageName, List<RunningAppProcessInfo> processes) {

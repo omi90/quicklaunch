@@ -1,25 +1,16 @@
 package com.newhere.quicklaunch;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-
 import com.newhere.sidebar.R;
-
-import android.app.Notification;
+import android.view.animation.Transformation;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.hardware.Camera.PreviewCallback;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
@@ -29,35 +20,29 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class SideBarService extends Service implements OnClickListener,OnKeyListener,AnimationListener{
+public class SideBarService extends Service implements OnTouchListener,OnKeyListener,AnimationListener{
 	private WindowManager wm;
-	private WindowManager.LayoutParams param,param2;
-	private ImageView next_image,prev_image,setting_image;
+	private WindowManager.LayoutParams paramSidebarVisible,paramSidebarHidden;
+	private ImageView prev_image,setting_image;
 	private ListView lv;
 	private View myview,parent;
 	private List<AppInfo> res;
 	private Animation openAnim,closeAnim;
-	private TranslateAnimation to_left,to_right;
 	private LinearLayout ll;
+	private boolean isSidebarVisible = false;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -65,50 +50,48 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 	}
 	public void onCreate(){
 		super.onCreate();
-		openAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.animator.open_anim);
-		closeAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.animator.close_anim);
-		closeAnim.setAnimationListener(this);
-		to_left = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -3, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
-		to_right = new TranslateAnimation(Animation.RELATIVE_TO_SELF, -3, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
-		to_left.setDuration(500);
-		to_left.setFillAfter(true);
-		to_right.setDuration(500);
-		to_right.setFillAfter(true);
 		wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
 		wm.getDefaultDisplay().getMetrics(dm);
 		int minHeight = Math.max(dm.heightPixels, dm.widthPixels);
 		int minWidth = minHeight==dm.heightPixels?dm.heightPixels:dm.widthPixels;
-		param = new WindowManager.LayoutParams(
+		paramSidebarVisible = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.TYPE_PHONE,
-				WindowManager.LayoutParams.FLAG_DIM_BEHIND|WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+				//WindowManager.LayoutParams.FLAG_DIM_BEHIND|
+				WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL|
+				WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
 				PixelFormat.TRANSLUCENT);
-		param.gravity = Gravity.TOP|Gravity.LEFT;
-		param.x = 0;
-		param.y = 0;
-		param.dimAmount = (float) 0.04;
-		next_image = new ImageView(this);
-		next_image.setImageResource(R.drawable.drag);
-		param2 = new WindowManager.LayoutParams(
+		paramSidebarVisible.gravity = Gravity.TOP|Gravity.LEFT;
+		paramSidebarVisible.x = 0;
+		paramSidebarVisible.y = 0;
+		paramSidebarVisible.dimAmount = (float) 0.08;
+		paramSidebarHidden = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.TYPE_PHONE,
 				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
 				PixelFormat.TRANSLUCENT);
-		param2.gravity = Gravity.CENTER|Gravity.LEFT;
-		//param2.x = 0;
-		//param2.y = minHeight/2 - next_image.getHeight()/2;
+		paramSidebarHidden.gravity = Gravity.CENTER|Gravity.LEFT;
 		LayoutInflater li = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 		parent = li.inflate(R.layout.layout_list_sidebar, null);
 		setting_image = (ImageView)parent.findViewById(R.id.imageView1);
 		ll = (LinearLayout)parent.findViewById(R.id.imagelayout);
+		ll.getLayoutParams().width = 0;
+		//ll.requestLayout();
 		myview = parent.findViewById(R.id.layout);
-		parent.setMinimumWidth(minWidth);
 		myview.setMinimumHeight(minHeight);
 		lv = (ListView)myview.findViewById(R.id.listView1);
-		setting_image.setOnClickListener(this);
+		setting_image.setOnTouchListener(this);
+		openAnim = new ResizeAnimation(ll, 75);
+		openAnim.setDuration(300);
+		openAnim.setAnimationListener(this);
+		openAnim.setFillAfter(true);
+		closeAnim = new ResizeAnimation(ll, 0);
+		closeAnim.setDuration(300);
+		closeAnim.setAnimationListener(this);
+		closeAnim.setFillAfter(true);
 		final PackageManager pm = getPackageManager();
 		Intent intent = new Intent(Intent.ACTION_MAIN, null);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -120,11 +103,12 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 			public void onItemClick(AdapterView<?> parent, View view, int pos,
 					long id) {
 				// TODO Auto-generated method stub
+				System.out.println("clciked on items");
 				AppInfo ai = res.get(pos);
 				Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
 				if(LaunchApp!=null){
 					startActivity( LaunchApp );
-					SideBarService.this.onClick(prev_image);
+					SideBarService.this.onTouch(prev_image,null);
 				}
 			}
 		});
@@ -132,6 +116,7 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					int pos, long id) {
+				System.out.println("long cliked on items");
 				AppInfo ai = res.get(pos);
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				sharingIntent.setType("application/vnd.android.package-archive");
@@ -140,20 +125,14 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 				i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);                     
 				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			    getApplication().startActivity(i);
-			    SideBarService.this.onClick(prev_image);
+			    SideBarService.this.onTouch(prev_image,null);
 				return true;
 			}
 		});
 		prev_image = (ImageView)myview.findViewById(R.id.prev_item);
-		parent.setOnClickListener(this);
-		parent.setOnKeyListener(this);
-		next_image.setOnClickListener(this);
-		prev_image.setOnClickListener(this);
-		wm.addView(next_image, param2);
+		prev_image.setOnTouchListener(this);
+		wm.addView(myview, paramSidebarHidden);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Message").setContentText("Click to close");
-		//Intent i=new Intent(this, FakePlayer.class);
-		//i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		//PendingIntent pi=PendingIntent.getActivity(this, 0, i, 0);
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		startForeground(1337, mBuilder.build());
 	}
@@ -161,67 +140,68 @@ public class SideBarService extends Service implements OnClickListener,OnKeyList
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		if (next_image != null)
-			wm.removeView(next_image);
+		wm.removeView(myview);
 		stopForeground(true);
 	}
 	@Override
-	public void onClick(View v) {
+	public boolean onTouch(View v,MotionEvent me) {
 		// TODO Auto-generated method stub
-		if(v.equals(setting_image)){
+		System.out.println("inside onTouch");
+		if(me == null){
+			System.out.println("Any shortcut clicked");
+			wm.updateViewLayout(myview, paramSidebarHidden);
+			ll.startAnimation(closeAnim);
 			final Intent intent = new Intent(getApplicationContext(), LauncherActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
-			return;
+			return true;
 		}
-		else if(v.equals(parent)){
+		else if(me.getAction() == MotionEvent.ACTION_OUTSIDE){
+			wm.updateViewLayout(myview, paramSidebarHidden);
 			ll.startAnimation(closeAnim);
-			prev_image.startAnimation(to_left);
-			return;
+			isSidebarVisible = false;
+			System.out.println("Touched outside");
+			return true;
+		} 
+		else if(v.equals(prev_image) && me.getAction()==MotionEvent.ACTION_DOWN){
+			if(!isSidebarVisible){
+				wm.updateViewLayout(myview, paramSidebarVisible);
+				System.out.println(ll.getVisibility());
+				ll.startAnimation(openAnim);
+				parent.invalidate();
+				isSidebarVisible = true;
+				System.out.println("View was not visible");
+			}
+			else{
+				wm.updateViewLayout(myview, paramSidebarHidden);
+				ll.startAnimation(closeAnim);
+				isSidebarVisible = false;
+				System.out.println("View was visible");
+			}
+			return true;
 		}
-		else if(v.equals(next_image)){
-			wm.removeView(next_image);
-			wm.addView(parent, param);
-			prev_image.startAnimation(to_right);
-			ll.startAnimation(openAnim);
-		}
-		else if(v.equals(prev_image)){
-			ll.startAnimation(closeAnim);
-			prev_image.startAnimation(to_left);
-		}
+		return false;
 	}
 	@Override
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			SideBarService.this.onClick(prev_image);
+			SideBarService.this.onTouch(prev_image,null);
 	    }
 	    return false;
 	}
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		// TODO Auto-generated method stub
-		if(animation.equals(closeAnim)){
-			Handler h = new Handler();
-			h.post(new Runnable() {
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					wm.removeView(parent);
-					wm.addView(next_image, param2);
-				}
-			});
-		}
+		System.out.println("Animation ended");
 	}
 	@Override
 	public void onAnimationRepeat(Animation animation) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onAnimationStart(Animation animation) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Animation started");
 	}
 }
 class AppInfo {
@@ -232,4 +212,33 @@ class AppInfo {
     String iconLoc;
     Drawable icon;
     String sourceDir = "";
+}
+class ResizeAnimation extends Animation {
+	private int startWidth;
+	final int targetWidth;
+	View view;
+ 
+	public ResizeAnimation(View view, int targetWidth) {
+		this.view = view;
+		this.targetWidth = targetWidth;
+	}
+ 
+	@Override
+	protected void applyTransformation(float interpolatedTime, Transformation t) {
+		int newWidth = (int) (startWidth + (targetWidth - startWidth) * interpolatedTime);
+		view.getLayoutParams().width = newWidth;
+		view.requestLayout();
+	}
+ 
+	@Override
+	public void initialize(int width, int height, int parentWidth, int parentHeight) {
+		super.initialize(width, height, parentWidth, parentHeight);
+		startWidth = view.getWidth();
+		System.out.println("start width >> "+startWidth);
+	}
+ 
+	@Override
+	public boolean willChangeBounds() {
+		return true;
+	}
 }
