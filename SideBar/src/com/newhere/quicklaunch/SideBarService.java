@@ -1,6 +1,7 @@
 package com.newhere.quicklaunch;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.List;
 import com.newhere.sidebar.R;
 import android.app.NotificationManager;
@@ -13,6 +14,7 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -81,7 +83,8 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		myview.setMinimumHeight(minHeight);
 		lv = (ListView)myview.findViewById(R.id.listView1);
 		setting_image.setOnTouchListener(this);
-		openAnim = new ResizeAnimation(ll, 75);
+		openAnim = new ResizeAnimation(ll, 
+				(int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
 		openAnim.setDuration(300);
 		openAnim.setAnimationListener(this);
 		openAnim.setFillAfter(true);
@@ -128,8 +131,9 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		myview.setOnTouchListener(this);
 		wm.addView(myview, paramSidebarHidden);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Message").setContentText("Click to close");
-		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		startForeground(1337, mBuilder.build());
+		NotificationHandler.setHidden(false);
+		NotificationHandler.createNotification(getApplicationContext());
 	}
 	@Override
 	public void onDestroy() {
@@ -184,12 +188,14 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		System.out.println("Animation ended");
 		if(animation.equals(openAnim)){
 			wm.updateViewLayout(myview, paramSidebarVisible);
+			ll.setVisibility(View.VISIBLE);
 			myview.getLayoutParams().width =LayoutParams.MATCH_PARENT;
 			myview.setOnTouchListener(this);
 			myview.requestLayout();
 		}
 		else{
 			wm.updateViewLayout(myview, paramSidebarHidden);
+			ll.setVisibility(View.INVISIBLE);
 			myview.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
 			myview.setOnTouchListener(null);
 			myview.requestLayout();
@@ -212,5 +218,11 @@ class AppInfo {
     int versionCode = 0;
     String iconLoc;
     Drawable icon;
-    String sourceDir = "";
+    String sourceDir = "";	
+}
+class AppInfoComparator implements Comparator<AppInfo>{
+	@Override
+	public int compare(AppInfo lhs, AppInfo rhs) {
+		return lhs.appname.compareTo(rhs.appname);
+	}
 }

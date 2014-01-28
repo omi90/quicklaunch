@@ -44,7 +44,7 @@ public class AppAdapter_Launcher extends ArrayAdapter<AppInfo> {
 		ri = values.get(position);
 		if(appsPref.containsKey(ri.appname)){
 			cb.setChecked((Boolean)appsPref.get(ri.appname));
-		}
+		}	
 		else{
 			cb.setChecked(false);
 		}

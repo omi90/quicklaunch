@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ProgressBar
-        android:id="@+id/progressbar_loading"
-        style="?android:attr/progressBarStyleLarge"
+    android:layout_height="match_parent"
+    android:background="#33FFFFFA">
+    <ImageView
+        android:id="@+id/progressimage_loading"
+        android:src="@drawable/qlicon"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-	<LinearLayout
+    <LinearLayout
     	android:layout_width="match_parent"
     	android:layout_height="match_parent"
     	android:orientation="vertical"
@@ -17,10 +18,9 @@
     	    android:id="@+id/gridView1"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        android:padding="5dp"
-	        android:numColumns="4"
+	        android:padding="10dp"
 	        android:horizontalSpacing="5dp"
-	        android:verticalSpacing="15dp"
+	        android:verticalSpacing="10dp"
 	        android:layout_weight="0.9">
     	</GridView>
     	<Button 
@@ -28,6 +28,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:layout_weight="0.1"
-		    android:text="Save"/>
+		    android:visibility="gone"
+		    android:text="Save and Exit"/>
 	</LinearLayout>
 </RelativeLayout>

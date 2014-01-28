@@ -1,15 +1,15 @@
 package com.newhere.quicklaunch;
 
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 class ResizeAnimation extends Animation {
-	private int startWidth;
+	private float startWidth;
 	final int targetWidth;
 	View view;
- 
-	public ResizeAnimation(View view, int targetWidth) {
+ 	public ResizeAnimation(View view, int targetWidth) {
 		this.view = view;
 		this.targetWidth = targetWidth;
 	}
