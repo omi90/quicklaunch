@@ -1,11 +1,18 @@
 package com.newhere.quicklaunch;
 
 import java.io.File;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import java.util.Comparator;
 import java.util.List;
 import com.newhere.sidebar.R;
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
@@ -15,11 +22,14 @@ import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.view.View.OnDragListener;
 import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
@@ -32,7 +42,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class SideBarService extends Service implements OnTouchListener,OnKeyListener,AnimationListener{
 	private WindowManager wm;
 	private WindowManager.LayoutParams paramSidebarVisible,paramSidebarHidden;
@@ -97,35 +109,8 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		res = LauncherActivity.getPrefInstalledApps(false, getPackageManager(), getApplicationContext());
 		lv.setAdapter(new AppAdapter(this, R.layout.listview, res));
 		lv.setClickable(true);
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int pos,
-					long id) {
-				// TODO Auto-generated method stub
-				AppInfo ai = res.get(pos);
-				Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
-				if(LaunchApp!=null){
-					startActivity( LaunchApp );
-					SideBarService.this.onTouch(prev_image,null);
-				}
-			}
-		});
-		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v,
-					int pos, long id) {
-				AppInfo ai = res.get(pos);
-				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-				sharingIntent.setType("application/vnd.android.package-archive");
-				sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(ai.sourceDir)));
-				Intent i = Intent.createChooser(sharingIntent, "Share via");
-				i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);                     
-				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			    getApplication().startActivity(i);
-			    SideBarService.this.onTouch(prev_image,null);
-				return true;
-			}
-		});
+		lv.setOnItemClickListener(new SidebarListItemClick());
+		lv.setOnItemLongClickListener(new SidebarListItemLongClick());
 		prev_image = (ImageView)myview.findViewById(R.id.prev_item);
 		prev_image.setOnTouchListener(this);
 		myview.setOnTouchListener(this);
@@ -134,6 +119,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		startForeground(1337, mBuilder.build());
 		NotificationHandler.setHidden(false);
 		NotificationHandler.createNotification(getApplicationContext());
+		
 	}
 	@Override
 	public void onDestroy() {
@@ -209,6 +195,78 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	@Override
 	public void onAnimationStart(Animation animation) {
 		// TODO Auto-generated method stub
+	}
+	@SuppressLint("NewApi")
+	class SidebarListItemLongClick implements OnItemLongClickListener{
+		@SuppressLint("NewApi")
+		@Override
+		public boolean onItemLongClick(AdapterView<?> av, View v,
+				int pos, long id) {
+			int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+			if (currentapiVersion >= 11){
+				ClipData data = ClipData.newPlainText("", "");
+				DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+				v.startDrag(data, shadowBuilder, v, 0);
+				v.setVisibility(View.INVISIBLE);
+				return true;
+			} 
+			else{
+				AppInfo ai = res.get(pos);
+				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+				sharingIntent.setType("application/vnd.android.package-archive");
+				sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(ai.sourceDir)));
+				Intent i = Intent.createChooser(sharingIntent, "Share via");
+				i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);                     
+				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				getApplication().startActivity(i);
+				SideBarService.this.onTouch(prev_image,null);
+				return true;
+			}
+		}
+	}
+	class SidebarListItemClick implements OnItemClickListener{
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int pos,
+				long id) {
+			// TODO Auto-generated method stub
+			AppInfo ai = res.get(pos);
+			Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
+			if(LaunchApp!=null){
+				startActivity( LaunchApp );
+				SideBarService.this.onTouch(prev_image,null);
+			}
+		}
+	}
+	class MyDragListener implements OnDragListener {
+	    Drawable enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
+	    Drawable normalShape = getResources().getDrawable(R.drawable.shape);
+
+	    @Override
+	    public boolean onDrag(View v, DragEvent event) {
+	      int action = event.getAction();
+	      switch (event.getAction()) {
+	      case DragEvent.ACTION_DRAG_STARTED:
+	        // do nothing
+	        break;
+	      case DragEvent.ACTION_DRAG_ENTERED:
+	        v.setBackgroundDrawable(enterShape);
+	        break;
+	      case DragEvent.ACTION_DRAG_EXITED:
+	        v.setBackgroundDrawable(normalShape);
+	        break;
+	      case DragEvent.ACTION_DROP:
+	        // Dropped, reassign View to ViewGroup
+	        View view = (View) event.getLocalState();
+	        ClipData cd = event.getClipData();
+	        Toast.makeText(getApplicationContext(), cd.toString(), 2000).show();
+	        break;
+	      case DragEvent.ACTION_DRAG_ENDED:
+	        v.setBackgroundDrawable(normalShape);
+	      default:
+	        break;
+	      }
+	      return true;
+	    }
 	}
 }
 class AppInfo {
