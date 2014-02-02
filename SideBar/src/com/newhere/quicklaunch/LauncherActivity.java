@@ -2,20 +2,17 @@ package com.newhere.quicklaunch;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.newhere.quicklaunch.menus.ExtraMenuService;
 import com.newhere.sidebar.R;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,13 +29,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 
 public class LauncherActivity extends Activity {
 	private final int gridViewVerticalSpacing = 10;//in dp
@@ -118,6 +109,9 @@ public class LauncherActivity extends Activity {
 						final Intent intent = new Intent(getBaseContext(), SideBarService.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startService(intent);
+						/*final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startService(intent);*/
 					}
 				});
 			}
