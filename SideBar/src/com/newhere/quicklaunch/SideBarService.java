@@ -56,6 +56,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	private LinearLayout parent;
 	private View myview,sidebarMenu;
 	private List<AppInfo> res;
+	private List<AppInfo> resSearch;
 	private Animation openAnim,closeAnim;
 	private LinearLayout ll;
 	private boolean isSidebarVisible = false;

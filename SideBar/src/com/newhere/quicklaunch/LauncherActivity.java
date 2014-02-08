@@ -109,9 +109,9 @@ public class LauncherActivity extends Activity {
 						final Intent intent = new Intent(getBaseContext(), SideBarService.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startService(intent);
-						/*final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startService(intent);*/
+						final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
+						intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startService(intent2);
 					}
 				});
 			}

@@ -25,6 +25,8 @@
         </activity>
         <service android:name="com.newhere.quicklaunch.SideBarService">
         </service>
+        <service android:name="com.newhere.quicklaunch.menus.ExtraMenuService">
+        </service>
         <service android:name="com.newhere.quicklaunch.NotificationHandler">
         </service>
         <receiver android:name="com.newhere.quicklaunch.BootCompletedReciever">  
