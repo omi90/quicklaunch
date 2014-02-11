@@ -4,8 +4,10 @@ import com.newhere.sidebar.R;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -18,6 +20,7 @@ import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SlidingDrawer;
@@ -30,10 +33,14 @@ public class ExtraMenuService extends Service implements OnTouchListener{
 	private Animation openAnim,closeAnim;
 	private WindowManager wm;
 	private boolean isMenuVisible = false;
+	private boolean isWindowVisible = false;
+	private LayoutParams param;
+	private DisplayMetrics dm;
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		dm = new DisplayMetrics();
 		wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 		LayoutInflater li = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 		paramHidden = new WindowManager.LayoutParams(
@@ -59,6 +66,10 @@ public class ExtraMenuService extends Service implements OnTouchListener{
 		notes = (ImageView)parent.findViewById(R.id.notes);
 		drawNotes = (ImageView)parent.findViewById(R.id.drawNotes);
 		viewOpener.setOnTouchListener(this);
+		phone.setOnTouchListener(this);
+		messaging.setOnTouchListener(this);
+		notes.setOnTouchListener(this);
+		drawNotes.setOnTouchListener(this);
 		parent.setOnTouchListener(this);
 		wm.addView(parent, paramHidden);
 		MyAnimationListener al = new MyAnimationListener();
@@ -80,20 +91,39 @@ public class ExtraMenuService extends Service implements OnTouchListener{
 	@Override
 	public boolean onTouch(View view, MotionEvent me) {
 		// TODO Auto-generated method stub
-		if((view == parent || view == viewOpener) && me.getAction() == MotionEvent.ACTION_DOWN){
+		if(view == phone && me.getAction() == MotionEvent.ACTION_DOWN){
+			
+		}
+		else if(view == messaging && me.getAction() == MotionEvent.ACTION_DOWN){
+			
+		}
+		else if(view == notes && me.getAction() == MotionEvent.ACTION_DOWN){
+	
+		}
+		else if(view == drawNotes && me.getAction() == MotionEvent.ACTION_DOWN){
+			/*if(isWindowVisible){
+				parent.removeViewAt(0);
+			}
+			wm.getDefaultDisplay().getMetrics(dm);
+			BrushView bv = new BrushView(getApplicationContext());
+			bv.setBackgroundColor(Color.CYAN);
+			param = new LayoutParams(dm.widthPixels, 
+									dm.heightPixels-menuContainer.getHeight(), 
+									Gravity.TOP|Gravity.LEFT);
+			parent.addView(bv, 0, param);
+			parent.invalidate();
+			isWindowVisible = true;*/
+		}
+		else if((view == parent || view == viewOpener) && me.getAction() == MotionEvent.ACTION_DOWN){
 			if(!isMenuVisible) {
-				System.out.println("menu is not visible");
 				menuContainer.requestLayout();
 				menuContainer.startAnimation(openAnim);
-				//wm.updateViewLayout(parent, paramShown);
-	    		isMenuVisible = true;
+				isMenuVisible = true;
 		        return true;
 			} 
 			else{
-				System.out.println("menu is visible");
 				menuContainer.requestLayout();
 				menuContainer.startAnimation(closeAnim);
-				//wm.updateViewLayout(parent, paramHidden);
 				isMenuVisible = false;
 		        return true;
 			}

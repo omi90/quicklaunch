@@ -2,6 +2,8 @@ package com.newhere.quicklaunch;
 
 import java.io.File;
 import android.view.View;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import com.newhere.sidebar.R;
@@ -11,14 +13,20 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.gesture.GestureOverlayView;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.DragEvent;
@@ -38,14 +46,15 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 @SuppressLint("NewApi")
 public class SideBarService extends Service implements OnTouchListener,OnKeyListener,AnimationListener,OnClickListener{
 	private WindowManager wm;
@@ -56,7 +65,6 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	private LinearLayout parent;
 	private View myview,sidebarMenu;
 	private List<AppInfo> res;
-	private List<AppInfo> resSearch;
 	private Animation openAnim,closeAnim;
 	private LinearLayout ll;
 	private boolean isSidebarVisible = false;
@@ -69,11 +77,23 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	private int pos = 0;
 	private boolean longClickMenuVisible=false;
 	private int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-	
+	private LinearLayout searchViewCont;
+	private ImageView searchButton;
+	private EditText searchText;
+	private boolean isSearchViewVisible = false;
+	private GestureOverlayView gOV;
+	private CharacterSearchListener csl;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		wm.getDefaultDisplay().getMetrics(dm);
+		gOV.getLayoutParams().width = dm.widthPixels-100;
+		super.onConfigurationChanged(newConfig);
 	}
 	public void onCreate(){
 		super.onCreate();
@@ -91,7 +111,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		paramSidebarVisible.gravity = Gravity.TOP|Gravity.LEFT;
 		paramSidebarVisible.x = 0;
 		paramSidebarVisible.y = 0;
-		paramSidebarVisible.dimAmount = (float) 0.08;
+		paramSidebarVisible.dimAmount = (float) 0.6;
 		paramSidebarHidden = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.MATCH_PARENT,
@@ -127,11 +147,18 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		res = LauncherActivity.getPrefInstalledApps(false, getPackageManager(), getApplicationContext());
 		listAdapter = new AppAdapter(this, R.layout.listview, res);
 		lv.setAdapter(listAdapter);
+		lv.setTextFilterEnabled(true);
 		lv.setClickable(true);
 		lv.setOnItemClickListener(new SidebarListItemClick());
 		lv.setOnItemLongClickListener(new SidebarListItemLongClick());
 		prev_image = (ImageView)myview.findViewById(R.id.prev_item);
 		prev_image.setOnTouchListener(this);
+		gOV = (GestureOverlayView) cont.findViewById(R.id.gestureView);//new GestureOverlayView(getApplicationContext());
+		gOV.getLayoutParams().width = dm.widthPixels-100;
+		gOV.setGestureColor(Color.CYAN);
+		gOV.setUncertainGestureColor(Color.RED);
+		csl = new CharacterSearchListener(SideBarService.this);
+		gOV.addOnGesturePerformedListener(csl);
 		myview.setOnTouchListener(this);
 		wm.addView(myview, paramSidebarHidden);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Message").setContentText("Click to close");
@@ -139,6 +166,25 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		NotificationHandler.setHidden(false);
 		NotificationHandler.createNotification(getApplicationContext());
 		setUpMenuImages();
+		searchButton = (ImageView) cont.findViewById(R.id.searchButton);
+		searchButton.setOnTouchListener(this);
+		searchText = (EditText)cont.findViewById(R.id.searchText);
+		searchText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				csl.setSearchString(s.toString());
+				listAdapter.getFilter().filter(s.toString().toLowerCase());
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+			}
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 	private void setUpMenuImages(){
 		if (currentapiVersion >= 11){
@@ -170,10 +216,12 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		wm.removeView(myview);
 		stopForeground(true);
 	}
+	public void closeSidebar(){
+		SideBarService.this.onTouch(prev_image,null);
+	}
 	@Override
 	public boolean onTouch(View v,MotionEvent me) {
 		// TODO Auto-generated method stub
-		System.out.println("inside on touch event");
 		if(me == null && v.equals(prev_image)){
 			ll.startAnimation(closeAnim);
 			return true;
@@ -196,6 +244,10 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			return true;
+		}
+		else if(v.equals(searchButton)){
+			searchText.setText("");
+			csl.clear();
 		}
 		else if(v.equals(myview) && isSidebarVisible){
 			if(longClickMenuVisible){
@@ -220,20 +272,23 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 			SideBarService.this.onTouch(prev_image,null);
 	    }
-	    return false;
+		return false;
 	}
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		System.out.println("Animation ended");
 		if(animation.equals(openAnim)){
 			wm.updateViewLayout(myview, paramSidebarVisible);
+			gOV.setVisibility(View.VISIBLE);
 			ll.setVisibility(View.VISIBLE);
 			myview.getLayoutParams().width =LayoutParams.MATCH_PARENT;
 			myview.setOnTouchListener(this);
 			myview.requestLayout();
 		}
 		else{
+			searchText.setText("");
 			wm.updateViewLayout(myview, paramSidebarHidden);
+			gOV.setVisibility(View.GONE);
 			ll.setVisibility(View.INVISIBLE);
 			myview.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
 			myview.setOnTouchListener(null);
@@ -257,11 +312,12 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 				int pos, long id) {
 			Vibrator vibr = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 			vibr.vibrate(50);
-			//int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-			AppInfo ai = (AppInfo)lv.getAdapter().getItem(pos);
+			//AppInfo ai = (AppInfo)lv.getAdapter().getItem(pos);
+			AppInfo ai = (AppInfo)av.getItemAtPosition(pos);
 			if (currentapiVersion >= 11){
 				ClipData.Item i = new ClipData.Item(ai.sourceDir);
 				ClipData.Item i2 = new ClipData.Item(ai.appname);
+				//System.out.println("position>>"+pos);
 				ClipData.Item i3 = new ClipData.Item(""+pos);
 				ClipData.Item i4 = new ClipData.Item(ai.pname);
 				ClipData data = ClipData.newPlainText("package", ai.pname);
@@ -301,18 +357,19 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 				cont.addView(longClickMenu, flp);
 				longClickMenu.setLayoutParams(flp);
 				longClickMenu.requestLayout();
-				System.out.println(longClickMenu.getLayoutParams());
+				//System.out.println(longClickMenu.getLayoutParams());
 				longClickMenuVisible = true;
 				return true;
 			}
 		}
 	}
 	private void shareIntent(String sourceDir){
+		System.out.println(sourceDir);
 		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 		sharingIntent.setType("application/vnd.android.package-archive");
 		sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(sourceDir)));
 		Intent i = Intent.createChooser(sharingIntent, "Share via");
-		i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);                     
+		i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);        
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplication().startActivity(i);
 		SideBarService.this.onTouch(prev_image,null);
@@ -322,7 +379,12 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
 		uninstallIntent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);                     
 		uninstallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(uninstallIntent);
+		try{
+			startActivity(uninstallIntent);
+		}
+		catch(Exception ex){
+			Toast.makeText(getApplicationContext(), "Can not uninstall application.", Toast.LENGTH_LONG);
+		}
 		SideBarService.this.onTouch(prev_image,null);
 	}
 	class SidebarListItemClick implements OnItemClickListener{
@@ -330,7 +392,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		public void onItemClick(AdapterView<?> parent, View view, int pos,
 				long id) {
 			// TODO Auto-generated method stub
-			AppInfo ai = res.get(pos);
+			AppInfo ai = (AppInfo)parent.getItemAtPosition(pos);
 			Intent LaunchApp = getPackageManager().getLaunchIntentForPackage(ai.pname);
 			if(LaunchApp!=null){
 				startActivity( LaunchApp );
@@ -341,10 +403,11 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	private void removeAppFromList(int pos){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		SharedPreferences.Editor edit = pref.edit();
-		edit.putBoolean(res.get(pos).appname, false);
+		AppInfo ai = listAdapter.getItem(pos);
+		edit.putBoolean(ai.appname, false);
 		edit.commit();
-		res.remove(pos);
-		listAdapter.notifyDataSetChanged();
+		listAdapter.delete(ai);
+		listAdapter.getFilter().filter(searchText.getText().toString());
 	}
 	class MyDragListener implements OnDragListener {
 		@Override
@@ -352,13 +415,16 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	    	int action = event.getAction();
 	    	switch (event.getAction()) {
 	    		case DragEvent.ACTION_DRAG_STARTED:
+	    			gOV.setVisibility(View.GONE);
 	    			break;
 	    		case DragEvent.ACTION_DRAG_ENTERED:
+	    			System.out.println(v);
 	    			if(v==uninstallIm){
 	    				ImageView im = (ImageView)v;
 	    				im.setImageResource(R.drawable.trash_full);
 	    			}
-	    			v.setAlpha((float) 0.8);
+	    			//v.setAlpha((float) 0.8);
+	    			v.setBackgroundColor(Color.WHITE);
 	    			v.invalidate();
 	    			//v.setBackgroundDrawable(enterShape);
 	    			break;
@@ -367,7 +433,8 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	    				ImageView im = (ImageView)v;
 	    				im.setImageResource(R.drawable.trash_empty);
 	    			}
-	    			v.setAlpha((float) 1.0);
+	    			//gOV.setVisibility(View.VISIBLE);
+	    			v.setBackgroundColor(Color.TRANSPARENT);
 	    			v.invalidate();
 	    			break;
 	    		case DragEvent.ACTION_DROP:
@@ -385,7 +452,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	    				removeAppFromList(Integer.parseInt(i.getText().toString()));	
 	    			}		
 	    			else if(v==shareIm){
-	    				ClipData.Item i = cd.getItemAt(0);
+	    				ClipData.Item i = cd.getItemAt(1);
 	    				shareIntent(i.getText().toString());
 	    			}
 	    			break;
@@ -394,7 +461,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	    				ImageView im = (ImageView)v;
 	    				im.setImageResource(R.drawable.trash_empty);
 	    			}
-	    			v.setAlpha((float) 1.0);
+	    			v.setBackgroundColor(Color.TRANSPARENT);
 	    			v.invalidate();
 	    			new Handler().post(new Runnable(){
 	    				@Override
@@ -402,6 +469,7 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 	    					removeMenuImages();
 	    				}
 	    			});
+	    			gOV.setVisibility(View.VISIBLE);
 	    			break;
 	    		default:
 	    			break;
@@ -423,6 +491,9 @@ public class SideBarService extends Service implements OnTouchListener,OnKeyList
 		else if(v==shareIm){
 			shareIntent(longClickMenuData.sourceDir);
 		}
+	}
+	public void callSearch(String searchString) {
+		searchText.setText(searchString);
 	}
 }
 class AppInfoComparator implements Comparator<AppInfo>{
