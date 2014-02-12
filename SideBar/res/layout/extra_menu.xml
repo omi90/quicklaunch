@@ -26,12 +26,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView 
-            android:id="@+id/notes"
+            android:id="@+id/camera"
             android:src="@drawable/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView 
-            android:id="@+id/drawNotes"
+            android:id="@+id/notes"
             android:src="@drawable/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

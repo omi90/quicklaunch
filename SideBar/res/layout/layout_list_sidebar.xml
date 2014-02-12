@@ -48,20 +48,42 @@
     	<EditText
     	    android:id="@+id/searchText"
     	    android:hint="Search Application"
+    	    android:textColor="#FFFFFF"
     	    android:layout_width="fill_parent"
     	    android:layout_height="50dp"/>
    		<ImageView 
         	android:id="@+id/searchButton"
-        	android:src="@drawable/button_delete"
+        	android:src="@drawable/ic_action_cancel"
         	android:layout_width="50dp"
         	android:layout_height="50dp"/>
 	</LinearLayout>
 	<TextView 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_vertical"
-	    android:textSize="25sp"
+	    android:layout_gravity="center_vertical|right"
+	    android:textSize="23sp"
 	    android:textColor="#FFFFFFFF"
-	    android:text="Draw one character at a time"/>
+	    android:text="Draw one character at a time for search"/>
+	<LinearLayout
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" 
+    	android:orientation="horizontal"
+    	android:layout_gravity="bottom|center_horizontal">
+        <ImageView 
+            android:id="@+id/phone"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView 
+            android:id="@+id/messaging"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView 
+            android:id="@+id/camera"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
 </android.gesture.GestureOverlayView>
 </FrameLayout>

@@ -5,10 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.newhere.quicklaunch.menus.ExtraMenuService;
 import com.newhere.sidebar.R;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -109,9 +106,9 @@ public class LauncherActivity extends Activity {
 						final Intent intent = new Intent(getBaseContext(), SideBarService.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startService(intent);
-						final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
+						/*final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
 						intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startService(intent2);
+						startService(intent2);*/
 					}
 				});
 			}
