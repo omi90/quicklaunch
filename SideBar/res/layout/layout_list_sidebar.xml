@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:id="@+id/drag_layer"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 <LinearLayout 
     android:id="@+id/layout"
     android:layout_width="wrap_content"
-    android:layout_height="fill_parent" >
+    android:layout_height="match_parent" >
     <LinearLayout 
         android:id="@+id/imagelayout"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:background="#99000000"
-    	android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     	<ImageView
 	        android:id="@+id/imageView1"
         	android:layout_width="50dp"
@@ -28,8 +28,8 @@
  	</LinearLayout>
 	<ImageView
 	    android:id="@+id/prev_item"
-	    android:layout_width="20dp"
-	    android:layout_height="80dp"
+	    android:layout_width="25dp"
+	    android:layout_height="60dp"
 	    android:scaleType="fitXY"
 	    android:layout_gravity="center_vertical"
 	    android:minHeight="80dp"
@@ -39,16 +39,18 @@
     android:id="@+id/gestureView"
     android:visibility="gone"
     android:layout_width="501dp"
-    android:layout_height="fill_parent"
-    android:layout_gravity="right" >
+    android:layout_gravity="right"
+    android:layout_height="fill_parent">
 	<LinearLayout 
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:orientation="horizontal" >
+    	android:orientation="horizontal" 
+	    android:layout_gravity="center_horizontal|top">
     	<EditText
     	    android:id="@+id/searchText"
     	    android:hint="Search Application"
-    	    android:textColor="#FFFFFF"
+    	    android:textColorHint="#AAFFFFFF"
+    	    android:textColor="#FFFFFFFF"
     	    android:layout_width="fill_parent"
     	    android:layout_height="50dp"/>
    		<ImageView 
@@ -58,32 +60,38 @@
         	android:layout_height="50dp"/>
 	</LinearLayout>
 	<TextView 
+	    android:id="@+id/drawcharmsg"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_vertical|right"
+	    android:layout_gravity="center_vertical|center_horizontal"
 	    android:textSize="23sp"
-	    android:textColor="#FFFFFFFF"
+	    android:textColor="#88FFFFFF"
 	    android:text="Draw one character at a time for search"/>
 	<LinearLayout
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" 
-    	android:orientation="horizontal"
-    	android:layout_gravity="bottom|center_horizontal">
-        <ImageView 
-            android:id="@+id/phone"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView 
-            android:id="@+id/messaging"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView 
-            android:id="@+id/camera"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-	</LinearLayout>
+	    android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="bottom|center_horizontal" 
+    	android:orientation="horizontal">
+        	<ImageView 
+        	    android:id="@+id/phone"
+        	    android:src="@drawable/ic_launcher_dial_pad"
+        	    android:layout_width="60dp"
+        	    android:layout_height="60dp"/>
+       		<ImageView 
+       	    	android:id="@+id/messaging"
+            	android:src="@drawable/ic_launcher_email"
+            	android:layout_width="60dp"
+            	android:layout_height="60dp"/>
+	        <ImageView 
+        	    android:id="@+id/flash"
+        	    android:src="@drawable/tourch"
+        	    android:layout_width="60dp"
+        	    android:layout_height="60dp"/>
+       		<ImageView 	
+    	        android:id="@+id/camera"
+        	    android:src="@drawable/ic_launcher_camera"
+        	    android:layout_width="60dp"
+        	    android:layout_height="60dp"/>
+    </LinearLayout>
 </android.gesture.GestureOverlayView>
 </FrameLayout>

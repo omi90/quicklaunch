@@ -1,0 +1,759 @@
+android.support.v4.app.BackStackState
+android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.Fragment$SavedState
+android.support.v4.app.Fragment$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentManagerState
+android.support.v4.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentState
+android.support.v4.app.FragmentState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentTabHost: void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener)
+android.support.v4.app.FragmentTabHost$SavedState
+android.support.v4.app.FragmentTabHost$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status[] values()
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status valueOf(java.lang.String)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColor(int)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColorResource(int)
+android.support.v4.view.PagerTabStrip: int getTabIndicatorColor()
+android.support.v4.view.PagerTabStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.PagerTabStrip: void setBackgroundColor(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundResource(int)
+android.support.v4.view.PagerTabStrip: void setDrawFullUnderline(boolean)
+android.support.v4.view.PagerTabStrip: boolean getDrawFullUnderline()
+android.support.v4.view.PagerTabStrip: int getMinHeight()
+android.support.v4.view.PagerTitleStrip: void setSingleLineAllCaps(android.widget.TextView)
+android.support.v4.view.PagerTitleStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTitleStrip: int getTextSpacing()
+android.support.v4.view.PagerTitleStrip: void setNonPrimaryAlpha(float)
+android.support.v4.view.PagerTitleStrip: void setTextColor(int)
+android.support.v4.view.PagerTitleStrip: void setGravity(int)
+android.support.v4.view.PagerTitleStrip: int getMinHeight()
+android.support.v4.view.ViewPager: void setScrollState(int)
+android.support.v4.view.ViewPager: void setAdapter(android.support.v4.view.PagerAdapter)
+android.support.v4.view.ViewPager: android.support.v4.view.PagerAdapter getAdapter()
+android.support.v4.view.ViewPager: void setOnAdapterChangeListener(android.support.v4.view.ViewPager$OnAdapterChangeListener)
+android.support.v4.view.ViewPager: int getClientWidth()
+android.support.v4.view.ViewPager: void setCurrentItem(int)
+android.support.v4.view.ViewPager: int getCurrentItem()
+android.support.v4.view.ViewPager: void setOnPageChangeListener(android.support.v4.view.ViewPager$OnPageChangeListener)
+android.support.v4.view.ViewPager: void setChildrenDrawingOrderEnabledCompat(boolean)
+android.support.v4.view.ViewPager: int getOffscreenPageLimit()
+android.support.v4.view.ViewPager: void setOffscreenPageLimit(int)
+android.support.v4.view.ViewPager: void setPageMargin(int)
+android.support.v4.view.ViewPager: int getPageMargin()
+android.support.v4.view.ViewPager: void setPageMarginDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.ViewPager: void setPageMarginDrawable(int)
+android.support.v4.view.ViewPager: void setScrollingCacheEnabled(boolean)
+android.support.v4.view.ViewPager$SavedState
+android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.DrawerLayout: void setScrimColor(int)
+android.support.v4.widget.DrawerLayout: void setDrawerListener(android.support.v4.widget.DrawerLayout$DrawerListener)
+android.support.v4.widget.DrawerLayout: void setDrawerLockMode(int)
+android.support.v4.widget.DrawerLayout$SavedState
+android.support.v4.widget.DrawerLayout$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.SlidingPaneLayout: void setParallaxDistance(int)
+android.support.v4.widget.SlidingPaneLayout: int getParallaxDistance()
+android.support.v4.widget.SlidingPaneLayout: void setSliderFadeColor(int)
+android.support.v4.widget.SlidingPaneLayout: int getSliderFadeColor()
+android.support.v4.widget.SlidingPaneLayout: void setCoveredFadeColor(int)
+android.support.v4.widget.SlidingPaneLayout: int getCoveredFadeColor()
+android.support.v4.widget.SlidingPaneLayout: void setPanelSlideListener(android.support.v4.widget.SlidingPaneLayout$PanelSlideListener)
+android.support.v4.widget.SlidingPaneLayout: void setShadowDrawable(android.graphics.drawable.Drawable)
+android.support.v4.widget.SlidingPaneLayout: void setShadowResource(int)
+android.support.v4.widget.SlidingPaneLayout$SavedState
+android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
+com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode[] values()
+com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode valueOf(java.lang.String)
+com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender[] values()
+com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender valueOf(java.lang.String)
+com.google.android.gms.R$attr: int adSize
+com.google.android.gms.R$attr: int adSizes
+com.google.android.gms.R$attr: int adUnitId
+com.google.android.gms.R$attr: int cameraBearing
+com.google.android.gms.R$attr: int cameraTargetLat
+com.google.android.gms.R$attr: int cameraTargetLng
+com.google.android.gms.R$attr: int cameraTilt
+com.google.android.gms.R$attr: int cameraZoom
+com.google.android.gms.R$attr: int mapType
+com.google.android.gms.R$attr: int uiCompass
+com.google.android.gms.R$attr: int uiRotateGestures
+com.google.android.gms.R$attr: int uiScrollGestures
+com.google.android.gms.R$attr: int uiTiltGestures
+com.google.android.gms.R$attr: int uiZoomControls
+com.google.android.gms.R$attr: int uiZoomGestures
+com.google.android.gms.R$attr: int useViewLifecycle
+com.google.android.gms.R$attr: int zOrderOnTop
+com.google.android.gms.R$color: int common_action_bar_splitter
+com.google.android.gms.R$color: int common_signin_btn_dark_text_default
+com.google.android.gms.R$color: int common_signin_btn_dark_text_disabled
+com.google.android.gms.R$color: int common_signin_btn_dark_text_focused
+com.google.android.gms.R$color: int common_signin_btn_dark_text_pressed
+com.google.android.gms.R$color: int common_signin_btn_default_background
+com.google.android.gms.R$color: int common_signin_btn_light_text_default
+com.google.android.gms.R$color: int common_signin_btn_light_text_disabled
+com.google.android.gms.R$color: int common_signin_btn_light_text_focused
+com.google.android.gms.R$color: int common_signin_btn_light_text_pressed
+com.google.android.gms.R$color: int common_signin_btn_text_dark
+com.google.android.gms.R$color: int common_signin_btn_text_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_disabled_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_disabled_focus_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_disabled_focus_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_disabled_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_focus_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_focus_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_normal_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_normal_light
+com.google.android.gms.R$drawable: int common_signin_btn_icon_pressed_dark
+com.google.android.gms.R$drawable: int common_signin_btn_icon_pressed_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_disabled_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_disabled_focus_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_disabled_focus_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_disabled_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_focus_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_focus_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_normal_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_normal_light
+com.google.android.gms.R$drawable: int common_signin_btn_text_pressed_dark
+com.google.android.gms.R$drawable: int common_signin_btn_text_pressed_light
+com.google.android.gms.R$drawable: int ic_plusone_medium_off_client
+com.google.android.gms.R$drawable: int ic_plusone_small_off_client
+com.google.android.gms.R$drawable: int ic_plusone_standard_off_client
+com.google.android.gms.R$drawable: int ic_plusone_tall_off_client
+com.google.android.gms.R$id: int hybrid
+com.google.android.gms.R$id: int none
+com.google.android.gms.R$id: int normal
+com.google.android.gms.R$id: int satellite
+com.google.android.gms.R$id: int terrain
+com.google.android.gms.R$integer: int google_play_services_version
+com.google.android.gms.R$string: int auth_client_needs_enabling_title
+com.google.android.gms.R$string: int auth_client_needs_installation_title
+com.google.android.gms.R$string: int auth_client_needs_update_title
+com.google.android.gms.R$string: int auth_client_play_services_err_notification_msg
+com.google.android.gms.R$string: int auth_client_requested_by_msg
+com.google.android.gms.R$string: int auth_client_using_bad_version_title
+com.google.android.gms.R$string: int common_google_play_services_enable_button
+com.google.android.gms.R$string: int common_google_play_services_enable_text
+com.google.android.gms.R$string: int common_google_play_services_enable_title
+com.google.android.gms.R$string: int common_google_play_services_install_button
+com.google.android.gms.R$string: int common_google_play_services_install_text_phone
+com.google.android.gms.R$string: int common_google_play_services_install_text_tablet
+com.google.android.gms.R$string: int common_google_play_services_install_title
+com.google.android.gms.R$string: int common_google_play_services_invalid_account_text
+com.google.android.gms.R$string: int common_google_play_services_invalid_account_title
+com.google.android.gms.R$string: int common_google_play_services_network_error_text
+com.google.android.gms.R$string: int common_google_play_services_network_error_title
+com.google.android.gms.R$string: int common_google_play_services_unknown_issue
+com.google.android.gms.R$string: int common_google_play_services_unsupported_date_text
+com.google.android.gms.R$string: int common_google_play_services_unsupported_text
+com.google.android.gms.R$string: int common_google_play_services_unsupported_title
+com.google.android.gms.R$string: int common_google_play_services_update_button
+com.google.android.gms.R$string: int common_google_play_services_update_text
+com.google.android.gms.R$string: int common_google_play_services_update_title
+com.google.android.gms.R$string: int common_signin_button_text
+com.google.android.gms.R$string: int common_signin_button_text_long
+com.google.android.gms.R$styleable: int[] AdsAttrs
+com.google.android.gms.R$styleable: int AdsAttrs_adSize
+com.google.android.gms.R$styleable: int AdsAttrs_adSizes
+com.google.android.gms.R$styleable: int AdsAttrs_adUnitId
+com.google.android.gms.R$styleable: int[] MapAttrs
+com.google.android.gms.R$styleable: int MapAttrs_cameraBearing
+com.google.android.gms.R$styleable: int MapAttrs_cameraTargetLat
+com.google.android.gms.R$styleable: int MapAttrs_cameraTargetLng
+com.google.android.gms.R$styleable: int MapAttrs_cameraTilt
+com.google.android.gms.R$styleable: int MapAttrs_cameraZoom
+com.google.android.gms.R$styleable: int MapAttrs_mapType
+com.google.android.gms.R$styleable: int MapAttrs_uiCompass
+com.google.android.gms.R$styleable: int MapAttrs_uiRotateGestures
+com.google.android.gms.R$styleable: int MapAttrs_uiScrollGestures
+com.google.android.gms.R$styleable: int MapAttrs_uiTiltGestures
+com.google.android.gms.R$styleable: int MapAttrs_uiZoomControls
+com.google.android.gms.R$styleable: int MapAttrs_uiZoomGestures
+com.google.android.gms.R$styleable: int MapAttrs_useViewLifecycle
+com.google.android.gms.R$styleable: int MapAttrs_zOrderOnTop
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.AdActivity: AdActivity()
+com.google.android.gms.ads.AdView: com.google.android.gms.ads.AdListener getAdListener()
+com.google.android.gms.ads.AdView: com.google.android.gms.ads.AdSize getAdSize()
+com.google.android.gms.ads.AdView: java.lang.String getAdUnitId()
+com.google.android.gms.ads.AdView: void setAdListener(com.google.android.gms.ads.AdListener)
+com.google.android.gms.ads.AdView: void setAdSize(com.google.android.gms.ads.AdSize)
+com.google.android.gms.ads.AdView: void setAdUnitId(java.lang.String)
+com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdListener getAdListener()
+com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdSize getAdSize()
+com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdSize[] getAdSizes()
+com.google.android.gms.ads.doubleclick.PublisherAdView: java.lang.String getAdUnitId()
+com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.doubleclick.AppEventListener getAppEventListener()
+com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdListener(com.google.android.gms.ads.AdListener)
+com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdSizes(com.google.android.gms.ads.AdSize[])
+com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdUnitId(java.lang.String)
+com.google.android.gms.ads.doubleclick.PublisherAdView: void setAppEventListener(com.google.android.gms.ads.doubleclick.AppEventListener)
+com.google.android.gms.ads.search.SearchAdView: com.google.android.gms.ads.AdListener getAdListener()
+com.google.android.gms.ads.search.SearchAdView: com.google.android.gms.ads.AdSize getAdSize()
+com.google.android.gms.ads.search.SearchAdView: java.lang.String getAdUnitId()
+com.google.android.gms.ads.search.SearchAdView: void setAdListener(com.google.android.gms.ads.AdListener)
+com.google.android.gms.ads.search.SearchAdView: void setAdSize(com.google.android.gms.ads.AdSize)
+com.google.android.gms.ads.search.SearchAdView: void setAdUnitId(java.lang.String)
+com.google.android.gms.cast.ApplicationMetadata
+com.google.android.gms.cast.ApplicationMetadata: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.cast.CastDevice
+com.google.android.gms.cast.CastDevice: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.common.SignInButton: void setSize(int)
+com.google.android.gms.common.SignInButton: void setColorScheme(int)
+com.google.android.gms.common.SignInButton: void setOnClickListener(android.view.View$OnClickListener)
+com.google.android.gms.common.SignInButton: void setEnabled(boolean)
+com.google.android.gms.common.api.Status
+com.google.android.gms.common.api.Status: com.google.android.gms.common.api.StatusCreator CREATOR
+com.google.android.gms.common.data.DataHolder
+com.google.android.gms.common.data.DataHolder: com.google.android.gms.common.data.DataHolderCreator CREATOR
+com.google.android.gms.common.images.ImageManager$ImageReceiver
+com.google.android.gms.common.images.WebImage
+com.google.android.gms.common.images.WebImage: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.common.internal.safeparcel.SafeParcelable
+com.google.android.gms.common.internal.safeparcel.SafeParcelable: java.lang.String NULL
+com.google.android.gms.drive.Contents
+com.google.android.gms.drive.Contents: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.DriveId
+com.google.android.gms.drive.DriveId: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.CloseContentsRequest
+com.google.android.gms.drive.internal.CloseContentsRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.CreateContentsRequest
+com.google.android.gms.drive.internal.CreateContentsRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.CreateFileIntentSenderRequest
+com.google.android.gms.drive.internal.CreateFileIntentSenderRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.CreateFileRequest
+com.google.android.gms.drive.internal.CreateFileRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.CreateFolderRequest
+com.google.android.gms.drive.internal.CreateFolderRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.GetMetadataRequest
+com.google.android.gms.drive.internal.GetMetadataRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OnContentsResponse
+com.google.android.gms.drive.internal.OnContentsResponse: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OnDownloadProgressResponse
+com.google.android.gms.drive.internal.OnDownloadProgressResponse: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OnDriveIdResponse
+com.google.android.gms.drive.internal.OnDriveIdResponse: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OnListEntriesResponse
+com.google.android.gms.drive.internal.OnListEntriesResponse: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OnMetadataResponse
+com.google.android.gms.drive.internal.OnMetadataResponse: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OpenContentsRequest
+com.google.android.gms.drive.internal.OpenContentsRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.OpenFileIntentSenderRequest
+com.google.android.gms.drive.internal.OpenFileIntentSenderRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.QueryRequest
+com.google.android.gms.drive.internal.QueryRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.internal.UpdateMetadataRequest
+com.google.android.gms.drive.internal.UpdateMetadataRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.metadata.internal.MetadataBundle
+com.google.android.gms.drive.metadata.internal.MetadataBundle: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.Query
+com.google.android.gms.drive.query.Query: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.internal.ComparisonFilter
+com.google.android.gms.drive.query.internal.ComparisonFilter: com.google.android.gms.drive.query.internal.a CREATOR
+com.google.android.gms.drive.query.internal.FieldOnlyFilter
+com.google.android.gms.drive.query.internal.FieldOnlyFilter: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.internal.FilterHolder
+com.google.android.gms.drive.query.internal.FilterHolder: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.internal.InFilter
+com.google.android.gms.drive.query.internal.InFilter: com.google.android.gms.drive.query.internal.e CREATOR
+com.google.android.gms.drive.query.internal.LogicalFilter
+com.google.android.gms.drive.query.internal.LogicalFilter: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.internal.NotFilter
+com.google.android.gms.drive.query.internal.NotFilter: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.drive.query.internal.Operator
+com.google.android.gms.drive.query.internal.Operator: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.Game
+com.google.android.gms.games.GameEntity
+com.google.android.gms.games.GameEntity: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.Player
+com.google.android.gms.games.PlayerEntity
+com.google.android.gms.games.PlayerEntity: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.b
+com.google.android.gms.games.d
+com.google.android.gms.games.multiplayer.Invitation
+com.google.android.gms.games.multiplayer.InvitationEntity
+com.google.android.gms.games.multiplayer.InvitationEntity: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.multiplayer.Participant
+com.google.android.gms.games.multiplayer.ParticipantEntity
+com.google.android.gms.games.multiplayer.ParticipantEntity: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.multiplayer.ParticipantResult
+com.google.android.gms.games.multiplayer.ParticipantResult: com.google.android.gms.games.multiplayer.ParticipantResultCreator CREATOR
+com.google.android.gms.games.multiplayer.b
+com.google.android.gms.games.multiplayer.d
+com.google.android.gms.games.multiplayer.realtime.RealTimeMessage
+com.google.android.gms.games.multiplayer.realtime.RealTimeMessage: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.multiplayer.realtime.Room
+com.google.android.gms.games.multiplayer.realtime.RoomEntity
+com.google.android.gms.games.multiplayer.realtime.RoomEntity: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.games.multiplayer.realtime.c
+com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatch
+com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntity
+com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntity: com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntityCreator CREATOR
+com.google.android.gms.games.multiplayer.turnbased.a
+com.google.android.gms.internal.ai
+com.google.android.gms.internal.ai: com.google.android.gms.internal.aj CREATOR
+com.google.android.gms.internal.bj
+com.google.android.gms.internal.bj: com.google.android.gms.internal.bi CREATOR
+com.google.android.gms.internal.bm
+com.google.android.gms.internal.bm: com.google.android.gms.internal.bl CREATOR
+com.google.android.gms.internal.bz
+com.google.android.gms.internal.bz: com.google.android.gms.internal.ca CREATOR
+com.google.android.gms.internal.cb
+com.google.android.gms.internal.cb: com.google.android.gms.internal.cc CREATOR
+com.google.android.gms.internal.cu
+com.google.android.gms.internal.cu: com.google.android.gms.internal.cv CREATOR
+com.google.android.gms.internal.cw: void setContext(android.content.Context)
+com.google.android.gms.internal.dt$a
+com.google.android.gms.internal.dt$a: com.google.android.gms.internal.ef CREATOR
+com.google.android.gms.internal.dv
+com.google.android.gms.internal.el
+com.google.android.gms.internal.el: com.google.android.gms.internal.em CREATOR
+com.google.android.gms.internal.en
+com.google.android.gms.internal.en: com.google.android.gms.internal.eo CREATOR
+com.google.android.gms.internal.ep
+com.google.android.gms.internal.ep: com.google.android.gms.internal.eq CREATOR
+com.google.android.gms.internal.ep$a
+com.google.android.gms.internal.ep$a: com.google.android.gms.internal.er CREATOR
+com.google.android.gms.internal.es$a
+com.google.android.gms.internal.es$a: com.google.android.gms.internal.et CREATOR
+com.google.android.gms.internal.ev
+com.google.android.gms.internal.ev: com.google.android.gms.internal.ew CREATOR
+com.google.android.gms.internal.ev$a
+com.google.android.gms.internal.ev$a: com.google.android.gms.internal.ex CREATOR
+com.google.android.gms.internal.ev$b
+com.google.android.gms.internal.ev$b: com.google.android.gms.internal.eu CREATOR
+com.google.android.gms.internal.ey
+com.google.android.gms.internal.ey: com.google.android.gms.internal.ez CREATOR
+com.google.android.gms.internal.fm
+com.google.android.gms.internal.gh
+com.google.android.gms.internal.gh: com.google.android.gms.internal.gi CREATOR
+com.google.android.gms.internal.go
+com.google.android.gms.internal.go: com.google.android.gms.internal.gp CREATOR
+com.google.android.gms.internal.gt
+com.google.android.gms.internal.gt: com.google.android.gms.internal.gu CREATOR
+com.google.android.gms.internal.gv
+com.google.android.gms.internal.gv: com.google.android.gms.internal.gw CREATOR
+com.google.android.gms.internal.gx
+com.google.android.gms.internal.gx: com.google.android.gms.internal.gy CREATOR
+com.google.android.gms.internal.hb
+com.google.android.gms.internal.hb: com.google.android.gms.internal.hc CREATOR
+com.google.android.gms.internal.hd
+com.google.android.gms.internal.hd: com.google.android.gms.internal.he CREATOR
+com.google.android.gms.internal.hd$a
+com.google.android.gms.internal.hd$a: com.google.android.gms.internal.ha CREATOR
+com.google.android.gms.internal.hf
+com.google.android.gms.internal.hf: com.google.android.gms.internal.hg CREATOR
+com.google.android.gms.internal.hi
+com.google.android.gms.internal.hi: com.google.android.gms.internal.hj CREATOR
+com.google.android.gms.internal.hu
+com.google.android.gms.internal.hu: com.google.android.gms.internal.hw CREATOR
+com.google.android.gms.internal.ib
+com.google.android.gms.internal.ib: com.google.android.gms.internal.ic CREATOR
+com.google.android.gms.internal.id
+com.google.android.gms.internal.id: com.google.android.gms.internal.ie CREATOR
+com.google.android.gms.internal.ig
+com.google.android.gms.internal.ig: com.google.android.gms.internal.ih CREATOR
+com.google.android.gms.internal.ig$a
+com.google.android.gms.internal.ig$a: com.google.android.gms.internal.ii CREATOR
+com.google.android.gms.internal.ig$b
+com.google.android.gms.internal.ig$b: com.google.android.gms.internal.ij CREATOR
+com.google.android.gms.internal.ig$b$a
+com.google.android.gms.internal.ig$b$a: com.google.android.gms.internal.ik CREATOR
+com.google.android.gms.internal.ig$b$b
+com.google.android.gms.internal.ig$b$b: com.google.android.gms.internal.il CREATOR
+com.google.android.gms.internal.ig$c
+com.google.android.gms.internal.ig$c: com.google.android.gms.internal.im CREATOR
+com.google.android.gms.internal.ig$d
+com.google.android.gms.internal.ig$d: com.google.android.gms.internal.in CREATOR
+com.google.android.gms.internal.ig$f
+com.google.android.gms.internal.ig$f: com.google.android.gms.internal.io CREATOR
+com.google.android.gms.internal.ig$g
+com.google.android.gms.internal.ig$g: com.google.android.gms.internal.ip CREATOR
+com.google.android.gms.internal.ig$h
+com.google.android.gms.internal.ig$h: com.google.android.gms.internal.iq CREATOR
+com.google.android.gms.internal.v
+com.google.android.gms.internal.v: com.google.android.gms.internal.w CREATOR
+com.google.android.gms.internal.x
+com.google.android.gms.internal.x: com.google.android.gms.internal.y CREATOR
+com.google.android.gms.location.ActivityRecognitionResult
+com.google.android.gms.location.ActivityRecognitionResult: com.google.android.gms.location.ActivityRecognitionResultCreator CREATOR
+com.google.android.gms.location.DetectedActivity
+com.google.android.gms.location.DetectedActivity: com.google.android.gms.location.DetectedActivityCreator CREATOR
+com.google.android.gms.location.LocationRequest
+com.google.android.gms.location.LocationRequest: com.google.android.gms.location.LocationRequestCreator CREATOR
+com.google.android.gms.location.a
+com.google.android.gms.location.a: com.google.android.gms.location.b CREATOR
+com.google.android.gms.location.d
+com.google.android.gms.location.d: com.google.android.gms.location.e CREATOR
+com.google.android.gms.location.f
+com.google.android.gms.location.f: com.google.android.gms.location.g CREATOR
+com.google.android.gms.maps.GoogleMapOptions
+com.google.android.gms.maps.GoogleMapOptions: com.google.android.gms.maps.GoogleMapOptionsCreator CREATOR
+com.google.android.gms.maps.MapView: com.google.android.gms.maps.GoogleMap getMap()
+com.google.android.gms.maps.model.CameraPosition
+com.google.android.gms.maps.model.CameraPosition: com.google.android.gms.maps.model.CameraPositionCreator CREATOR
+com.google.android.gms.maps.model.CircleOptions
+com.google.android.gms.maps.model.CircleOptions: com.google.android.gms.maps.model.CircleOptionsCreator CREATOR
+com.google.android.gms.maps.model.GroundOverlayOptions
+com.google.android.gms.maps.model.GroundOverlayOptions: com.google.android.gms.maps.model.GroundOverlayOptionsCreator CREATOR
+com.google.android.gms.maps.model.LatLng
+com.google.android.gms.maps.model.LatLng: com.google.android.gms.maps.model.LatLngCreator CREATOR
+com.google.android.gms.maps.model.LatLngBounds
+com.google.android.gms.maps.model.LatLngBounds: com.google.android.gms.maps.model.LatLngBoundsCreator CREATOR
+com.google.android.gms.maps.model.MarkerOptions
+com.google.android.gms.maps.model.MarkerOptions: com.google.android.gms.maps.model.MarkerOptionsCreator CREATOR
+com.google.android.gms.maps.model.PolygonOptions
+com.google.android.gms.maps.model.PolygonOptions: com.google.android.gms.maps.model.PolygonOptionsCreator CREATOR
+com.google.android.gms.maps.model.PolylineOptions
+com.google.android.gms.maps.model.PolylineOptions: com.google.android.gms.maps.model.PolylineOptionsCreator CREATOR
+com.google.android.gms.maps.model.Tile
+com.google.android.gms.maps.model.Tile: com.google.android.gms.maps.model.TileCreator CREATOR
+com.google.android.gms.maps.model.TileOverlayOptions
+com.google.android.gms.maps.model.TileOverlayOptions: com.google.android.gms.maps.model.TileOverlayOptionsCreator CREATOR
+com.google.android.gms.maps.model.VisibleRegion
+com.google.android.gms.maps.model.VisibleRegion: com.google.android.gms.maps.model.VisibleRegionCreator CREATOR
+com.google.android.gms.plus.PlusOneButton: void setOnPlusOneClickListener(com.google.android.gms.plus.PlusOneButton$OnPlusOneClickListener)
+com.google.android.gms.plus.PlusOneButton: void setAnnotation(int)
+com.google.android.gms.plus.PlusOneButton: void setSize(int)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setOnClickListener(android.view.View$OnClickListener)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setAnnotation(int)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setSize(int)
+com.google.android.gms.plus.PlusOneButtonWithPopup: android.app.PendingIntent getResolution()
+com.google.android.gms.wallet.Address
+com.google.android.gms.wallet.Address: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.Cart
+com.google.android.gms.wallet.Cart: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.CountrySpecification
+com.google.android.gms.wallet.CountrySpecification: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.FullWallet
+com.google.android.gms.wallet.FullWallet: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.FullWalletRequest
+com.google.android.gms.wallet.FullWalletRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.LineItem
+com.google.android.gms.wallet.LineItem: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.LoyaltyWalletObject
+com.google.android.gms.wallet.LoyaltyWalletObject: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.MaskedWallet
+com.google.android.gms.wallet.MaskedWallet: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.MaskedWalletRequest
+com.google.android.gms.wallet.MaskedWalletRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.NotifyTransactionStatusRequest
+com.google.android.gms.wallet.NotifyTransactionStatusRequest: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.OfferWalletObject
+com.google.android.gms.wallet.OfferWalletObject: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.wallet.ProxyCard
+com.google.android.gms.wallet.ProxyCard: android.os.Parcelable$Creator CREATOR
+com.larswerkman.holocolorpicker.ColorPicker
+com.larswerkman.holocolorpicker.ColorPicker: ColorPicker(android.content.Context)
+com.larswerkman.holocolorpicker.ColorPicker: ColorPicker(android.content.Context,android.util.AttributeSet)
+com.larswerkman.holocolorpicker.ColorPicker: ColorPicker(android.content.Context,android.util.AttributeSet,int)
+com.larswerkman.holocolorpicker.ColorPicker: void setOnColorChangedListener(com.larswerkman.holocolorpicker.ColorPicker$OnColorChangedListener)
+com.larswerkman.holocolorpicker.ColorPicker: com.larswerkman.holocolorpicker.ColorPicker$OnColorChangedListener getOnColorChangedListener()
+com.larswerkman.holocolorpicker.ColorPicker: int getColor()
+com.larswerkman.holocolorpicker.ColorPicker: void setColor(int)
+com.larswerkman.holocolorpicker.ColorPicker: void setNewCenterColor(int)
+com.larswerkman.holocolorpicker.ColorPicker: void setOldCenterColor(int)
+com.larswerkman.holocolorpicker.ColorPicker: int getOldCenterColor()
+com.larswerkman.holocolorpicker.ColorPicker: void setShowOldCenterColor(boolean)
+com.larswerkman.holocolorpicker.ColorPicker: boolean getShowOldCenterColor()
+com.larswerkman.holocolorpicker.OpacityBar
+com.larswerkman.holocolorpicker.OpacityBar: OpacityBar(android.content.Context)
+com.larswerkman.holocolorpicker.OpacityBar: OpacityBar(android.content.Context,android.util.AttributeSet)
+com.larswerkman.holocolorpicker.OpacityBar: OpacityBar(android.content.Context,android.util.AttributeSet,int)
+com.larswerkman.holocolorpicker.OpacityBar: void setColor(int)
+com.larswerkman.holocolorpicker.OpacityBar: void setOpacity(int)
+com.larswerkman.holocolorpicker.OpacityBar: int getOpacity()
+com.larswerkman.holocolorpicker.OpacityBar: int getColor()
+com.larswerkman.holocolorpicker.OpacityBar: void setColorPicker(com.larswerkman.holocolorpicker.ColorPicker)
+com.larswerkman.holocolorpicker.R$attr: int bar_length
+com.larswerkman.holocolorpicker.R$attr: int bar_orientation_horizontal
+com.larswerkman.holocolorpicker.R$attr: int bar_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$attr: int bar_pointer_radius
+com.larswerkman.holocolorpicker.R$attr: int bar_thickness
+com.larswerkman.holocolorpicker.R$attr: int color_center_halo_radius
+com.larswerkman.holocolorpicker.R$attr: int color_center_radius
+com.larswerkman.holocolorpicker.R$attr: int color_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$attr: int color_pointer_radius
+com.larswerkman.holocolorpicker.R$attr: int color_wheel_radius
+com.larswerkman.holocolorpicker.R$attr: int color_wheel_thickness
+com.larswerkman.holocolorpicker.R$dimen: int bar_length
+com.larswerkman.holocolorpicker.R$dimen: int bar_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$dimen: int bar_pointer_radius
+com.larswerkman.holocolorpicker.R$dimen: int bar_thickness
+com.larswerkman.holocolorpicker.R$dimen: int color_center_halo_radius
+com.larswerkman.holocolorpicker.R$dimen: int color_center_radius
+com.larswerkman.holocolorpicker.R$dimen: int color_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$dimen: int color_pointer_radius
+com.larswerkman.holocolorpicker.R$dimen: int color_wheel_radius
+com.larswerkman.holocolorpicker.R$dimen: int color_wheel_thickness
+com.larswerkman.holocolorpicker.R$styleable: int[] ColorBars
+com.larswerkman.holocolorpicker.R$styleable: int ColorBars_bar_length
+com.larswerkman.holocolorpicker.R$styleable: int ColorBars_bar_orientation_horizontal
+com.larswerkman.holocolorpicker.R$styleable: int ColorBars_bar_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorBars_bar_pointer_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorBars_bar_thickness
+com.larswerkman.holocolorpicker.R$styleable: int[] ColorPicker
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_center_halo_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_center_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_pointer_halo_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_pointer_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_wheel_radius
+com.larswerkman.holocolorpicker.R$styleable: int ColorPicker_color_wheel_thickness
+com.larswerkman.holocolorpicker.SVBar
+com.larswerkman.holocolorpicker.SVBar: SVBar(android.content.Context)
+com.larswerkman.holocolorpicker.SVBar: SVBar(android.content.Context,android.util.AttributeSet)
+com.larswerkman.holocolorpicker.SVBar: SVBar(android.content.Context,android.util.AttributeSet,int)
+com.larswerkman.holocolorpicker.SVBar: void setSaturation(float)
+com.larswerkman.holocolorpicker.SVBar: void setValue(float)
+com.larswerkman.holocolorpicker.SVBar: void setColor(int)
+com.larswerkman.holocolorpicker.SVBar: int getColor()
+com.larswerkman.holocolorpicker.SVBar: void setColorPicker(com.larswerkman.holocolorpicker.ColorPicker)
+com.larswerkman.holocolorpicker.SaturationBar: void setColor(int)
+com.larswerkman.holocolorpicker.SaturationBar: void setSaturation(float)
+com.larswerkman.holocolorpicker.SaturationBar: int getColor()
+com.larswerkman.holocolorpicker.SaturationBar: void setColorPicker(com.larswerkman.holocolorpicker.ColorPicker)
+com.larswerkman.holocolorpicker.ValueBar: void setColor(int)
+com.larswerkman.holocolorpicker.ValueBar: void setValue(float)
+com.larswerkman.holocolorpicker.ValueBar: int getColor()
+com.larswerkman.holocolorpicker.ValueBar: void setColorPicker(com.larswerkman.holocolorpicker.ColorPicker)
+com.newhere.quicklaunch.AdLauncherService
+com.newhere.quicklaunch.AdLauncherService: AdLauncherService()
+com.newhere.quicklaunch.AppInfo
+com.newhere.quicklaunch.AppInfo: android.os.Parcelable$Creator CREATOR
+com.newhere.quicklaunch.BootCompletedReciever
+com.newhere.quicklaunch.BootCompletedReciever: BootCompletedReciever()
+com.newhere.quicklaunch.CustomizeActivity
+com.newhere.quicklaunch.CustomizeActivity: CustomizeActivity()
+com.newhere.quicklaunch.LauncherActivity
+com.newhere.quicklaunch.LauncherActivity: LauncherActivity()
+com.newhere.quicklaunch.NotificationHandler
+com.newhere.quicklaunch.NotificationHandler: NotificationHandler()
+com.newhere.quicklaunch.SideBarService
+com.newhere.quicklaunch.SideBarService: SideBarService()
+com.newhere.sidebar.R$animator: int close_anim
+com.newhere.sidebar.R$animator: int open_anim
+com.newhere.sidebar.R$attr: int adSize
+com.newhere.sidebar.R$attr: int adSizes
+com.newhere.sidebar.R$attr: int adUnitId
+com.newhere.sidebar.R$attr: int bar_length
+com.newhere.sidebar.R$attr: int bar_orientation_horizontal
+com.newhere.sidebar.R$attr: int bar_pointer_halo_radius
+com.newhere.sidebar.R$attr: int bar_pointer_radius
+com.newhere.sidebar.R$attr: int bar_thickness
+com.newhere.sidebar.R$attr: int cameraBearing
+com.newhere.sidebar.R$attr: int cameraTargetLat
+com.newhere.sidebar.R$attr: int cameraTargetLng
+com.newhere.sidebar.R$attr: int cameraTilt
+com.newhere.sidebar.R$attr: int cameraZoom
+com.newhere.sidebar.R$attr: int color_center_halo_radius
+com.newhere.sidebar.R$attr: int color_center_radius
+com.newhere.sidebar.R$attr: int color_pointer_halo_radius
+com.newhere.sidebar.R$attr: int color_pointer_radius
+com.newhere.sidebar.R$attr: int color_wheel_radius
+com.newhere.sidebar.R$attr: int color_wheel_thickness
+com.newhere.sidebar.R$attr: int mapType
+com.newhere.sidebar.R$attr: int uiCompass
+com.newhere.sidebar.R$attr: int uiRotateGestures
+com.newhere.sidebar.R$attr: int uiScrollGestures
+com.newhere.sidebar.R$attr: int uiTiltGestures
+com.newhere.sidebar.R$attr: int uiZoomControls
+com.newhere.sidebar.R$attr: int uiZoomGestures
+com.newhere.sidebar.R$attr: int useViewLifecycle
+com.newhere.sidebar.R$attr: int zOrderOnTop
+com.newhere.sidebar.R$color: int black_transparent
+com.newhere.sidebar.R$color: int common_action_bar_splitter
+com.newhere.sidebar.R$color: int common_signin_btn_dark_text_default
+com.newhere.sidebar.R$color: int common_signin_btn_dark_text_disabled
+com.newhere.sidebar.R$color: int common_signin_btn_dark_text_focused
+com.newhere.sidebar.R$color: int common_signin_btn_dark_text_pressed
+com.newhere.sidebar.R$color: int common_signin_btn_default_background
+com.newhere.sidebar.R$color: int common_signin_btn_light_text_default
+com.newhere.sidebar.R$color: int common_signin_btn_light_text_disabled
+com.newhere.sidebar.R$color: int common_signin_btn_light_text_focused
+com.newhere.sidebar.R$color: int common_signin_btn_light_text_pressed
+com.newhere.sidebar.R$color: int common_signin_btn_text_dark
+com.newhere.sidebar.R$color: int common_signin_btn_text_light
+com.newhere.sidebar.R$color: int transparent
+com.newhere.sidebar.R$dimen: int activity_horizontal_margin
+com.newhere.sidebar.R$dimen: int activity_vertical_margin
+com.newhere.sidebar.R$dimen: int bar_length
+com.newhere.sidebar.R$dimen: int bar_pointer_halo_radius
+com.newhere.sidebar.R$dimen: int bar_pointer_radius
+com.newhere.sidebar.R$dimen: int bar_thickness
+com.newhere.sidebar.R$dimen: int color_center_halo_radius
+com.newhere.sidebar.R$dimen: int color_center_radius
+com.newhere.sidebar.R$dimen: int color_pointer_halo_radius
+com.newhere.sidebar.R$dimen: int color_pointer_radius
+com.newhere.sidebar.R$dimen: int color_wheel_radius
+com.newhere.sidebar.R$dimen: int color_wheel_thickness
+com.newhere.sidebar.R$drawable: int bg
+com.newhere.sidebar.R$drawable: int button_delete
+com.newhere.sidebar.R$drawable: int checkbox_empty
+com.newhere.sidebar.R$drawable: int checkbox_full
+com.newhere.sidebar.R$drawable: int checkbox_style
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_disabled_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_disabled_focus_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_disabled_focus_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_disabled_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_focus_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_focus_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_normal_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_normal_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_pressed_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_icon_pressed_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_disabled_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_disabled_focus_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_disabled_focus_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_disabled_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_focus_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_focus_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_normal_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_normal_light
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_pressed_dark
+com.newhere.sidebar.R$drawable: int common_signin_btn_text_pressed_light
+com.newhere.sidebar.R$drawable: int drag
+com.newhere.sidebar.R$drawable: int ic_action_cancel
+com.newhere.sidebar.R$drawable: int ic_action_next_item
+com.newhere.sidebar.R$drawable: int ic_action_previous_item
+com.newhere.sidebar.R$drawable: int ic_launcher
+com.newhere.sidebar.R$drawable: int ic_launcher_camera
+com.newhere.sidebar.R$drawable: int ic_launcher_dial_pad
+com.newhere.sidebar.R$drawable: int ic_launcher_email
+com.newhere.sidebar.R$drawable: int ic_plusone_medium_off_client
+com.newhere.sidebar.R$drawable: int ic_plusone_small_off_client
+com.newhere.sidebar.R$drawable: int ic_plusone_standard_off_client
+com.newhere.sidebar.R$drawable: int ic_plusone_tall_off_client
+com.newhere.sidebar.R$drawable: int qlicon
+com.newhere.sidebar.R$drawable: int settings
+com.newhere.sidebar.R$drawable: int share
+com.newhere.sidebar.R$drawable: int tourch
+com.newhere.sidebar.R$drawable: int trash_empty
+com.newhere.sidebar.R$drawable: int trash_full
+com.newhere.sidebar.R$id: int LinearLayout2
+com.newhere.sidebar.R$id: int app_image
+com.newhere.sidebar.R$id: int button1
+com.newhere.sidebar.R$id: int camera
+com.newhere.sidebar.R$id: int checkBox1
+com.newhere.sidebar.R$id: int customize_menu
+com.newhere.sidebar.R$id: int delete
+com.newhere.sidebar.R$id: int drag_layer
+com.newhere.sidebar.R$id: int drawcharmsg
+com.newhere.sidebar.R$id: int flash
+com.newhere.sidebar.R$id: int gestureView
+com.newhere.sidebar.R$id: int gridView1
+com.newhere.sidebar.R$id: int hybrid
+com.newhere.sidebar.R$id: int imageView1
+com.newhere.sidebar.R$id: int imagelayout
+com.newhere.sidebar.R$id: int layout
+com.newhere.sidebar.R$id: int listView1
+com.newhere.sidebar.R$id: int ll
+com.newhere.sidebar.R$id: int menuContainer
+com.newhere.sidebar.R$id: int messaging
+com.newhere.sidebar.R$id: int none
+com.newhere.sidebar.R$id: int normal
+com.newhere.sidebar.R$id: int notes
+com.newhere.sidebar.R$id: int opacitybar
+com.newhere.sidebar.R$id: int phone
+com.newhere.sidebar.R$id: int picker
+com.newhere.sidebar.R$id: int prev_item
+com.newhere.sidebar.R$id: int progressimage_loading
+com.newhere.sidebar.R$id: int satellite
+com.newhere.sidebar.R$id: int save
+com.newhere.sidebar.R$id: int searchButton
+com.newhere.sidebar.R$id: int searchText
+com.newhere.sidebar.R$id: int share
+com.newhere.sidebar.R$id: int skip
+com.newhere.sidebar.R$id: int svbar
+com.newhere.sidebar.R$id: int terrain
+com.newhere.sidebar.R$id: int textView1
+com.newhere.sidebar.R$id: int uninstall
+com.newhere.sidebar.R$id: int viewOpener
+com.newhere.sidebar.R$integer: int google_play_services_version
+com.newhere.sidebar.R$layout: int activity_launcher
+com.newhere.sidebar.R$layout: int adlauncher_service_layout
+com.newhere.sidebar.R$layout: int customize_activity
+com.newhere.sidebar.R$layout: int extra_menu
+com.newhere.sidebar.R$layout: int layout_list_sidebar
+com.newhere.sidebar.R$layout: int listview
+com.newhere.sidebar.R$layout: int listview_launch
+com.newhere.sidebar.R$layout: int listview_menu_layout
+com.newhere.sidebar.R$layout: int menu_layout_sidebar
+com.newhere.sidebar.R$layout: int searchfield_layout
+com.newhere.sidebar.R$menu: int launcher
+com.newhere.sidebar.R$raw: int gestures
+com.newhere.sidebar.R$string: int action_settings
+com.newhere.sidebar.R$string: int admob_pub_id
+com.newhere.sidebar.R$string: int app_name
+com.newhere.sidebar.R$string: int auth_client_needs_enabling_title
+com.newhere.sidebar.R$string: int auth_client_needs_installation_title
+com.newhere.sidebar.R$string: int auth_client_needs_update_title
+com.newhere.sidebar.R$string: int auth_client_play_services_err_notification_msg
+com.newhere.sidebar.R$string: int auth_client_requested_by_msg
+com.newhere.sidebar.R$string: int auth_client_using_bad_version_title
+com.newhere.sidebar.R$string: int common_google_play_services_enable_button
+com.newhere.sidebar.R$string: int common_google_play_services_enable_text
+com.newhere.sidebar.R$string: int common_google_play_services_enable_title
+com.newhere.sidebar.R$string: int common_google_play_services_install_button
+com.newhere.sidebar.R$string: int common_google_play_services_install_text_phone
+com.newhere.sidebar.R$string: int common_google_play_services_install_text_tablet
+com.newhere.sidebar.R$string: int common_google_play_services_install_title
+com.newhere.sidebar.R$string: int common_google_play_services_invalid_account_text
+com.newhere.sidebar.R$string: int common_google_play_services_invalid_account_title
+com.newhere.sidebar.R$string: int common_google_play_services_network_error_text
+com.newhere.sidebar.R$string: int common_google_play_services_network_error_title
+com.newhere.sidebar.R$string: int common_google_play_services_unknown_issue
+com.newhere.sidebar.R$string: int common_google_play_services_unsupported_date_text
+com.newhere.sidebar.R$string: int common_google_play_services_unsupported_text
+com.newhere.sidebar.R$string: int common_google_play_services_unsupported_title
+com.newhere.sidebar.R$string: int common_google_play_services_update_button
+com.newhere.sidebar.R$string: int common_google_play_services_update_text
+com.newhere.sidebar.R$string: int common_google_play_services_update_title
+com.newhere.sidebar.R$string: int common_signin_button_text
+com.newhere.sidebar.R$string: int common_signin_button_text_long
+com.newhere.sidebar.R$string: int customize_menu
+com.newhere.sidebar.R$string: int hello_world
+com.newhere.sidebar.R$style: int AppBaseTheme
+com.newhere.sidebar.R$style: int AppTheme
+com.newhere.sidebar.R$style: int Theme_CustomDialog
+com.newhere.sidebar.R$style: int Theme_Transparent
+com.newhere.sidebar.R$style: int Theme_TransparentWithTitle
+com.newhere.sidebar.R$styleable: int[] AdsAttrs
+com.newhere.sidebar.R$styleable: int AdsAttrs_adSize
+com.newhere.sidebar.R$styleable: int AdsAttrs_adSizes
+com.newhere.sidebar.R$styleable: int AdsAttrs_adUnitId
+com.newhere.sidebar.R$styleable: int[] ColorBars
+com.newhere.sidebar.R$styleable: int ColorBars_bar_length
+com.newhere.sidebar.R$styleable: int ColorBars_bar_orientation_horizontal
+com.newhere.sidebar.R$styleable: int ColorBars_bar_pointer_halo_radius
+com.newhere.sidebar.R$styleable: int ColorBars_bar_pointer_radius
+com.newhere.sidebar.R$styleable: int ColorBars_bar_thickness
+com.newhere.sidebar.R$styleable: int[] ColorPicker
+com.newhere.sidebar.R$styleable: int ColorPicker_color_center_halo_radius
+com.newhere.sidebar.R$styleable: int ColorPicker_color_center_radius
+com.newhere.sidebar.R$styleable: int ColorPicker_color_pointer_halo_radius
+com.newhere.sidebar.R$styleable: int ColorPicker_color_pointer_radius
+com.newhere.sidebar.R$styleable: int ColorPicker_color_wheel_radius
+com.newhere.sidebar.R$styleable: int ColorPicker_color_wheel_thickness
+com.newhere.sidebar.R$styleable: int[] MapAttrs
+com.newhere.sidebar.R$styleable: int MapAttrs_cameraBearing
+com.newhere.sidebar.R$styleable: int MapAttrs_cameraTargetLat
+com.newhere.sidebar.R$styleable: int MapAttrs_cameraTargetLng
+com.newhere.sidebar.R$styleable: int MapAttrs_cameraTilt
+com.newhere.sidebar.R$styleable: int MapAttrs_cameraZoom
+com.newhere.sidebar.R$styleable: int MapAttrs_mapType
+com.newhere.sidebar.R$styleable: int MapAttrs_uiCompass
+com.newhere.sidebar.R$styleable: int MapAttrs_uiRotateGestures
+com.newhere.sidebar.R$styleable: int MapAttrs_uiScrollGestures
+com.newhere.sidebar.R$styleable: int MapAttrs_uiTiltGestures
+com.newhere.sidebar.R$styleable: int MapAttrs_uiZoomControls
+com.newhere.sidebar.R$styleable: int MapAttrs_uiZoomGestures
+com.newhere.sidebar.R$styleable: int MapAttrs_useViewLifecycle
+com.newhere.sidebar.R$styleable: int MapAttrs_zOrderOnTop

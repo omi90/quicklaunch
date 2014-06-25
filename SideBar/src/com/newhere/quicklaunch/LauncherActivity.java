@@ -17,8 +17,13 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.DisplayMetrics;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,6 +50,8 @@ public class LauncherActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		int[] arr = {0x77000000,0x77050505};
+		getWindow().setBackgroundDrawable( new GradientDrawable(Orientation.BL_TR, arr));
 		setContentView(R.layout.activity_launcher);
 		dm = getResources().getDisplayMetrics(); 
 		dWidth = dm.widthPixels;
@@ -65,6 +72,9 @@ public class LauncherActivity extends Activity {
 		});
 		im = (ImageView)findViewById(R.id.progressimage_loading);
 		gv.setNumColumns(getNoOfColumns(getRequestedOrientation()==Configuration.ORIENTATION_LANDSCAPE));
+		if(savedInstanceState != null){
+			apps = savedInstanceState.getParcelableArrayList("Apps");
+		}
 	}
 	@Override
 	protected void onStart() {
@@ -75,7 +85,8 @@ public class LauncherActivity extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				apps = getInstalledApps(false, getPackageManager());
+				if(apps == null)
+					apps = getInstalledApps(false, getPackageManager());
 				listSize = apps.size();
 				data = (Map<String, Boolean>) getData(getApplicationContext());
 				saveData(apps,getApplicationContext());
@@ -106,9 +117,6 @@ public class LauncherActivity extends Activity {
 						final Intent intent = new Intent(getBaseContext(), SideBarService.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startService(intent);
-						/*final Intent intent2 = new Intent(getBaseContext(), ExtraMenuService.class);
-						intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startService(intent2);*/
 					}
 				});
 			}
@@ -142,7 +150,16 @@ public class LauncherActivity extends Activity {
 		}
 		super.onConfigurationChanged(newConfig);
 	}
-	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		  super.onSaveInstanceState(savedInstanceState);
+		  savedInstanceState.putParcelableArrayList("Apps", apps);
+	}
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+	  super.onRestoreInstanceState(savedInstanceState);
+	  apps = savedInstanceState.getParcelableArrayList("Apps");
+	}
 	public static Map<String,?> getData(Context context){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 		return pref.getAll();
@@ -161,18 +178,18 @@ public class LauncherActivity extends Activity {
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		//MenuInflater inflater=getMenuInflater();
-        //inflater.inflate(R.menu.launcher, menu);
+		MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.launcher, menu);
         return super.onCreateOptionsMenu(menu);
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		/*if(item.getItemId()==R.id.customize_menu){
+		if(item.getItemId()==R.id.customize_menu){
 			final Intent i = new Intent(getApplicationContext(),CustomizeActivity.class);
 			startActivity(i);
 		}
-		*/return super.onOptionsItemSelected(item);
+		return super.onOptionsItemSelected(item);
 	}
 	public static ArrayList<AppInfo> getInstalledApps(boolean systemApps,PackageManager pm){
 		List<PackageInfo> apps = pm.getInstalledPackages(PackageManager.GET_META_DATA);

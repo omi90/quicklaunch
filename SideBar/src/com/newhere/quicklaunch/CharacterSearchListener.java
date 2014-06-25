@@ -24,8 +24,6 @@ public class CharacterSearchListener implements OnGesturePerformedListener {
 		this.searchString = searchString;
 	}
 	public CharacterSearchListener(SideBarService obj) {
-		//gestureLib = GestureLibraries.fromFile(new File(Environment.getExternalStorageDirectory()
-        //        .getAbsolutePath(), "gestures"));
 		gestureLib = GestureLibraries.fromRawResource(obj.getApplicationContext(),R.raw.gestures);
 		if (!gestureLib.load()) {
 			//finish();

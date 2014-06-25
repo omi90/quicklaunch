@@ -87,7 +87,7 @@ public class AppAdapter extends ArrayAdapter<AppInfo> {
 		ActivityManager manager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
 		List<RunningAppProcessInfo> processes = manager.getRunningAppProcesses();
 		if(checkRunningStatus(ri.pname, processes)){
-			rowView.setBackgroundColor(Color.argb(220, 13, 97, 84));
+			rowView.setBackgroundColor(SideBarService.getContrastColor(Preferences.getSidebarColor(context), true));
 		}
 		return rowView;
 	}

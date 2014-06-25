@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="320dp"
+    android:background="#007007"
+    android:orientation="vertical" >
+    <Button 
+	    android:id="@+id/skip"
+	    android:layout_gravity="bottom"
+	    android:text="Loading..."
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+</LinearLayout>

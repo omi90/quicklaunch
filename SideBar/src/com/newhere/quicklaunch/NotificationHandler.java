@@ -16,7 +16,7 @@ public class NotificationHandler extends Service{
 	public static final int requestCode = 10001; 
 	private static String hidden = "Click here to Show QuickLaunch";
 	private static String shown =  "Click here to hide QuickLaunch";
-	
+	private static SideBarService sidebarserviceObj = null;
 	public static boolean isHidden() {
 		return isHidden;
 	}
@@ -37,17 +37,18 @@ public class NotificationHandler extends Service{
 		System.out.println("starting service");
 		if(isHidden){
 			NotificationHandler.setHidden(false);
-			createNotification(getApplicationContext());
-			startService(new Intent(getApplicationContext(),SideBarService.class));
+			Intent i = new Intent(getApplicationContext(),SideBarService.class);
+			startService(i);
 		}
 		else{
 			NotificationHandler.setHidden(true);
-			createNotification(getApplicationContext());
 			stopService(new Intent(getApplicationContext(),SideBarService.class));
+			createNotification(getApplicationContext(),null);
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
-	public static void createNotification(Context ctx){
+	public static void createNotification(Context ctx,SideBarService obj){
+		sidebarserviceObj = obj;
 		PendingIntent pi = PendingIntent.getService(ctx, 
 				0, 
 				new Intent(ctx,NotificationHandler.class), 
@@ -61,5 +62,7 @@ public class NotificationHandler extends Service{
 				.setContentIntent(pi)
 				.setOngoing(true);
 		nm.notify(NotificationHandler.requestCode, mBuilder.build());
+		if(obj!=null)
+			obj.startForeground(NotificationHandler.requestCode, mBuilder.build());
 	}
 }
